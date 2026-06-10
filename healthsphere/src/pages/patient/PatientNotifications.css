@@ -46,7 +46,7 @@
 .notifications-title-group h1 {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -146,16 +146,30 @@
   }
 }
 
-.notification-item:nth-child(1) { animation-delay: 0.1s; }
-.notification-item:nth-child(2) { animation-delay: 0.15s; }
-.notification-item:nth-child(3) { animation-delay: 0.2s; }
-.notification-item:nth-child(4) { animation-delay: 0.25s; }
-.notification-item:nth-child(5) { animation-delay: 0.3s; }
+.notification-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.notification-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.notification-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.notification-item:nth-child(4) {
+  animation-delay: 0.25s;
+}
+.notification-item:nth-child(5) {
+  animation-delay: 0.3s;
+}
 
 /* Unread notification styling */
 .notification-item.unread {
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(76, 175, 80, 0.02) 100%);
-  border-left-color: #4CAF50;
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.05) 0%,
+    rgba(76, 175, 80, 0.02) 100%
+  );
+  border-left-color: #4caf50;
 }
 
 /* Read notification styling */
@@ -227,14 +241,15 @@
   flex-shrink: 0;
   width: 8px;
   height: 8px;
-  background: #4CAF50;
+  background: #4caf50;
   border-radius: 50%;
   margin-top: 0.5rem;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -342,7 +357,7 @@
 /* Accessibility */
 .notification-item:focus-visible,
 .mark-all-read-btn:focus-visible {
-  outline: 2px solid #4CAF50;
+  outline: 2px solid #4caf50;
   outline-offset: 2px;
 }
 
@@ -351,7 +366,11 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, transparent 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.1) 0%,
+    transparent 100%
+  );
   border-radius: 0.875rem;
   pointer-events: none;
 }

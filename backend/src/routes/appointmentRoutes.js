@@ -7,7 +7,9 @@ router.post('/', async (req, res) => {
   const { patientId, doctorId, date, time, reason } = req.body;
 
   if (!patientId || !doctorId || !date || !time) {
-    return res.status(400).json({ message: 'patientId, doctorId, date, and time are required.' });
+    return res
+      .status(400)
+      .json({ message: 'patientId, doctorId, date, and time are required.' });
   }
 
   try {
@@ -31,7 +33,7 @@ router.post('/', async (req, res) => {
       date: dateObj.toISOString().split('T')[0],
       time: dateObj.toISOString().split('T')[1].substring(0, 5),
       reason: row.reason,
-      status: row.status
+      status: row.status,
     });
   } catch (error) {
     console.error('Error booking appointment:', error);
@@ -52,7 +54,9 @@ router.patch('/:id/cancel', async (req, res) => {
     res.json({ message: 'Appointment cancelled' });
   } catch (error) {
     console.error('Error cancelling appointment:', error);
-    res.status(500).json({ message: 'Server error while cancelling appointment' });
+    res
+      .status(500)
+      .json({ message: 'Server error while cancelling appointment' });
   }
 });
 
@@ -63,14 +67,16 @@ router.patch('/:id/status', async (req, res) => {
   if (isNaN(id)) return res.status(400).json({ message: 'Invalid ID' });
 
   try {
-    await db.query(
-      `UPDATE appointments SET status = $1 WHERE id = $2`,
-      [status, id]
-    );
+    await db.query(`UPDATE appointments SET status = $1 WHERE id = $2`, [
+      status,
+      id,
+    ]);
     res.json({ message: 'Appointment status updated' });
   } catch (error) {
     console.error('Error updating appointment status:', error);
-    res.status(500).json({ message: 'Server error while updating appointment status' });
+    res
+      .status(500)
+      .json({ message: 'Server error while updating appointment status' });
   }
 });
 
@@ -89,7 +95,7 @@ router.get('/patient/:id', async (req, res) => {
       [id]
     );
 
-    const formatted = result.rows.map(row => {
+    const formatted = result.rows.map((row) => {
       const dateObj = new Date(row.appointment_date);
       return {
         id: row.id,
@@ -99,7 +105,7 @@ router.get('/patient/:id', async (req, res) => {
         date: dateObj.toISOString().split('T')[0],
         time: dateObj.toISOString().split('T')[1].substring(0, 5),
         reason: row.reason,
-        status: row.status
+        status: row.status,
       };
     });
 
@@ -115,7 +121,10 @@ router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { date, time, reason } = req.body;
   if (isNaN(id)) return res.status(400).json({ message: 'Invalid ID' });
-  if (!date || !time) return res.status(400).json({ message: 'Date and time are required for PUT update' });
+  if (!date || !time)
+    return res
+      .status(400)
+      .json({ message: 'Date and time are required for PUT update' });
 
   try {
     const appointmentDate = new Date(`${date}T${time}:00`);
@@ -126,7 +135,9 @@ router.put('/:id', async (req, res) => {
     res.json({ message: 'Appointment fully updated via PUT' });
   } catch (error) {
     console.error('Error updating appointment:', error);
-    res.status(500).json({ message: 'Server error while updating appointment' });
+    res
+      .status(500)
+      .json({ message: 'Server error while updating appointment' });
   }
 });
 
@@ -140,7 +151,9 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Appointment permanently deleted via DELETE' });
   } catch (error) {
     console.error('Error deleting appointment:', error);
-    res.status(500).json({ message: 'Server error while deleting appointment' });
+    res
+      .status(500)
+      .json({ message: 'Server error while deleting appointment' });
   }
 });
 

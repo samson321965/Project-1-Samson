@@ -137,7 +137,7 @@
 
 .admin-apt-action-btn.success {
   background: rgba(76, 175, 80, 0.1);
-  color: #4CAF50;
+  color: #4caf50;
 }
 
 .admin-apt-action-btn.success:hover {
@@ -182,7 +182,7 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

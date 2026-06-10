@@ -9,7 +9,6 @@ router.put('/patients/:id', adminController.updatePatient);
 router.delete('/patients/:id', adminController.deletePatient);
 router.post('/patients/:id/reset-password', adminController.resetPassword);
 
-
 // Staff
 router.get('/staff', adminController.getAllStaff);
 router.post('/staff', adminController.createStaff);

@@ -12,7 +12,7 @@ exports.createRequest = async (req, res) => {
     // Check if user exists
     const userQuery = 'SELECT id FROM users WHERE email = $1 AND role = $2';
     const userResult = await db.query(userQuery, [email, 'patient']);
-    
+
     const userId = userResult.rows.length > 0 ? userResult.rows[0].id : null;
 
     const query = `
@@ -20,12 +20,17 @@ exports.createRequest = async (req, res) => {
       VALUES ($1, $2, $3, $4)
       RETURNING *
     `;
-    const result = await db.query(query, [userId, email, subject || 'Password Reset Request', message]);
+    const result = await db.query(query, [
+      userId,
+      email,
+      subject || 'Password Reset Request',
+      message,
+    ]);
 
-    res.status(201).json({ 
-      success: true, 
+    res.status(201).json({
+      success: true,
       message: 'Your request has been submitted to the Help Desk.',
-      request: result.rows[0]
+      request: result.rows[0],
     });
   } catch (error) {
     console.error('Create help desk request error:', error);
@@ -53,7 +58,9 @@ exports.respondToRequest = async (req, res) => {
   const { requestId, adminResponse, resetPassword, newPassword } = req.body;
 
   if (!requestId || !adminResponse) {
-    return res.status(400).json({ message: 'Request ID and response message are required.' });
+    return res
+      .status(400)
+      .json({ message: 'Request ID and response message are required.' });
   }
 
   try {
@@ -64,7 +71,10 @@ exports.respondToRequest = async (req, res) => {
       WHERE id = $2 
       RETURNING *
     `;
-    const updateResult = await db.query(updateQuery, [adminResponse, requestId]);
+    const updateResult = await db.query(updateQuery, [
+      adminResponse,
+      requestId,
+    ]);
 
     if (updateResult.rows.length === 0) {
       return res.status(404).json({ message: 'Request not found.' });
@@ -77,32 +87,35 @@ exports.respondToRequest = async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-      await db.query(
-        'UPDATE users SET password_hash = $1 WHERE id = $2',
-        [hashedPassword, request.user_id]
-      );
+      await db.query('UPDATE users SET password_hash = $1 WHERE id = $2', [
+        hashedPassword,
+        request.user_id,
+      ]);
     }
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: 'Response sent successfully.',
-      request: updateResult.rows[0]
+      request: updateResult.rows[0],
     });
   } catch (error) {
     console.error('Respond to request error:', error);
-    res.status(500).json({ message: 'Server error while responding to request.' });
+    res
+      .status(500)
+      .json({ message: 'Server error while responding to request.' });
   }
 };
 
 exports.getRequestStatus = async (req, res) => {
-    const { email } = req.params;
-    
-    try {
-        const query = 'SELECT * FROM help_desk_requests WHERE email = $1 ORDER BY created_at DESC';
-        const result = await db.query(query, [email]);
-        res.json(result.rows);
-    } catch (error) {
-        console.error('Get request status error:', error);
-        res.status(500).json({ message: 'Server error while fetching status.' });
-    }
+  const { email } = req.params;
+
+  try {
+    const query =
+      'SELECT * FROM help_desk_requests WHERE email = $1 ORDER BY created_at DESC';
+    const result = await db.query(query, [email]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Get request status error:', error);
+    res.status(500).json({ message: 'Server error while fetching status.' });
+  }
 };

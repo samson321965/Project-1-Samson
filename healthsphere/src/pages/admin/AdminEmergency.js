@@ -16,20 +16,18 @@ export default function AdminEmergency() {
       {/* Control Banner */}
       <div className="admin-emergency-banner">
         <div className="admin-emergency-content">
-          <AlertTriangle 
-            size={24} 
+          <AlertTriangle
+            size={24}
             className={`admin-emergency-icon ${emergencyMode ? 'active' : ''}`}
           />
           <div className="admin-emergency-text">
             <p>
               {emergencyMode ? 'Emergency Mode ACTIVE' : 'Emergency Mode OFF'}
             </p>
-            <p>
-              Activating grants all staff access to all patient records
-            </p>
+            <p>Activating grants all staff access to all patient records</p>
           </div>
         </div>
-        <button 
+        <button
           onClick={() => setEmergencyMode(!emergencyMode)}
           className={`admin-emergency-btn ${emergencyMode ? 'active' : 'inactive'}`}
         >
@@ -42,7 +40,7 @@ export default function AdminEmergency() {
         <>
           <h2 className="admin-emergency-section-title">All Patient Records</h2>
           <div className="admin-emergency-grid">
-            {patients.map(p => (
+            {patients.map((p) => (
               <div key={p.id} className="admin-emergency-patient-card">
                 <div className="admin-emergency-patient-header">
                   <div className="admin-emergency-patient-avatar">
@@ -57,16 +55,27 @@ export default function AdminEmergency() {
                 </div>
                 <div className="admin-emergency-patient-details">
                   <div className="admin-emergency-patient-detail">
-                    <span className="admin-emergency-detail-label">Allergies:</span>
-                    <span className="admin-emergency-detail-value">{p.allergies?.join(', ') || 'None'}</span>
+                    <span className="admin-emergency-detail-label">
+                      Allergies:
+                    </span>
+                    <span className="admin-emergency-detail-value">
+                      {p.allergies?.join(', ') || 'None'}
+                    </span>
                   </div>
                   <div className="admin-emergency-patient-detail">
-                    <span className="admin-emergency-detail-label">Conditions:</span>
-                    <span className="admin-emergency-detail-value">{p.medicalHistory?.join(', ') || 'None'}</span>
+                    <span className="admin-emergency-detail-label">
+                      Conditions:
+                    </span>
+                    <span className="admin-emergency-detail-value">
+                      {p.medicalHistory?.join(', ') || 'None'}
+                    </span>
                   </div>
                   <div className="admin-emergency-patient-detail">
                     <span className="admin-emergency-detail-label">Meds:</span>
-                    <span className="admin-emergency-detail-value">{p.prescriptions?.map(r => r.medication).join(', ') || 'None'}</span>
+                    <span className="admin-emergency-detail-value">
+                      {p.prescriptions?.map((r) => r.medication).join(', ') ||
+                        'None'}
+                    </span>
                   </div>
                 </div>
               </div>

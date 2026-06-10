@@ -41,19 +41,20 @@ src/
 
 ### Key CSS Classes
 
-| Class | Purpose | Usage |
-|-------|---------|-------|
-| `dashboard-main-wrapper` | Main layout container | Root div in DashboardLayout |
-| `dashboard-sidebar` | Sidebar area | Aside element in DashboardLayout |
-| `dashboard-content-wrapper` | Main content wrapper | New wrapper after sidebar |
-| `dashboard-header` | Top navigation bar | Sticky header |
-| `dashboard-main-content` | Scrollable content area | Page content container |
+| Class                       | Purpose                 | Usage                            |
+| --------------------------- | ----------------------- | -------------------------------- |
+| `dashboard-main-wrapper`    | Main layout container   | Root div in DashboardLayout      |
+| `dashboard-sidebar`         | Sidebar area            | Aside element in DashboardLayout |
+| `dashboard-content-wrapper` | Main content wrapper    | New wrapper after sidebar        |
+| `dashboard-header`          | Top navigation bar      | Sticky header                    |
+| `dashboard-main-content`    | Scrollable content area | Page content container           |
 
 ---
 
 ## Patient Dashboard Styling
 
 ### Colors & Styling
+
 - **Primary Color**: Teal green (#2D9F5F)
 - **Emphasis**: Health-focused, calming design
 - **Cards**: Gradient backgrounds on stat cards (hover effect with lift animation)
@@ -61,6 +62,7 @@ src/
 ### Key Classes
 
 #### Stat Cards
+
 ```css
 .patient-stats-grid                 /* Responsive grid layout */
 .patient-stat-card                  /* Individual stat card with gradient */
@@ -72,6 +74,7 @@ src/
 ```
 
 #### Cards & Lists
+
 ```css
 .patient-content-grid               /* Main content area grid */
 .patient-card                       /* Individual content card */
@@ -89,7 +92,9 @@ src/
   {/* Stat cards */}
   <div className="patient-stats-grid">
     <div className="patient-stat-card">
-      <div className="patient-stat-icon"><Icon /></div>
+      <div className="patient-stat-icon">
+        <Icon />
+      </div>
       <div className="patient-stat-content">
         <p className="text-2xl font-bold">42</p>
         <p>Appointments</p>
@@ -101,7 +106,7 @@ src/
   <div className="patient-content-grid">
     <div className="patient-card">
       <h2>Upcoming Appointments</h2>
-      {appointments.map(apt => (
+      {appointments.map((apt) => (
         <div key={apt.id} className="patient-appointment-item">
           <div className="patient-appointment-time">{apt.date}</div>
           {/* ... */}
@@ -117,6 +122,7 @@ src/
 ## Doctor Dashboard Styling
 
 ### Colors & Styling
+
 - **Primary Color**: Teal green with colored stat cards
 - **Emphasis**: Schedule and patient management
 - **Cards**: Individual color coding (primary, success, warning, destructive)
@@ -125,6 +131,7 @@ src/
 ### Key Classes
 
 #### Stat Cards
+
 ```css
 .doctor-stats-grid                  /* Grid layout for stat cards */
 .doctor-stat-card                   /* Base stat card */
@@ -136,6 +143,7 @@ src/
 ```
 
 #### Schedule Section
+
 ```css
 .doctor-emergency-banner            /* Emergency mode banner with pulse effect */
 .doctor-schedule-section            /* Schedule container card */
@@ -152,23 +160,17 @@ src/
 ```jsx
 <div className="doctor-dashboard">
   {emergencyMode && (
-    <div className="doctor-emergency-banner">
-      🚨 EMERGENCY MODE ACTIVE
-    </div>
+    <div className="doctor-emergency-banner">🚨 EMERGENCY MODE ACTIVE</div>
   )}
 
   <div className="doctor-stats-grid">
-    <div className="doctor-stat-card primary">
-      {/* Card content */}
-    </div>
-    <div className="doctor-stat-card success">
-      {/* Card content */}
-    </div>
+    <div className="doctor-stat-card primary">{/* Card content */}</div>
+    <div className="doctor-stat-card success">{/* Card content */}</div>
   </div>
 
   <div className="doctor-schedule-section">
     <h2>Today's Schedule</h2>
-    {appointments.map(apt => (
+    {appointments.map((apt) => (
       <div key={apt.id} className="doctor-appointment-item">
         <div className="doctor-appointment-time">{apt.time}</div>
         <div className="doctor-appointment-info">
@@ -186,6 +188,7 @@ src/
 ## Admin Dashboard Styling
 
 ### Colors & Styling
+
 - **Primary Color**: Teal green
 - **Emphasis**: Data visualization and system management
 - **Cards**: Top border accent (color-coded by function)
@@ -194,6 +197,7 @@ src/
 ### Key Classes
 
 #### Stat Cards with Accents
+
 ```css
 .admin-stats-grid                   /* Grid for admin stat cards */
 .admin-stat-card                    /* Base stat card with top border */
@@ -209,6 +213,7 @@ src/
 ```
 
 #### Section & Table Classes
+
 ```css
 .admin-content-grid                 /* Main content grid layout */
 .admin-section                      /* Content section card */
@@ -246,9 +251,7 @@ src/
   <div className="admin-content-grid">
     <div className="admin-section">
       <h2>System Status</h2>
-      <table className="admin-data-table">
-        {/* Table content */}
-      </table>
+      <table className="admin-data-table">{/* Table content */}</table>
     </div>
   </div>
 </div>
@@ -261,11 +264,13 @@ src/
 All dashboard styling includes responsive breakpoints:
 
 ### Breakpoints
+
 - **Mobile**: < 640px (single column)
 - **Tablet**: 640px - 768px (2 columns)
 - **Desktop**: > 768px (4 columns or full featured layout)
 
 ### Responsive Changes
+
 ```css
 /* Mobile (640px and down) */
 - Single column grids
@@ -291,18 +296,22 @@ All dashboard styling includes responsive breakpoints:
 ### Available Animations
 
 #### Hover Effects
+
 - **Stat Cards**: Lift up animation (translateY -4px to -2px)
 - **Appointment Items**: Slide right (translateX 4px)
 - **Links**: Color transitions
 
 #### Fade Effects
+
 - **Slide In Up**: `slideInUp` (300ms)
 - **Fade In**: `fadeIn` (300ms)
 
 #### Pulse Animation
+
 - **Emergency Banner**: Continuous pulse effect
 
 ### Accessibility
+
 - Respects `prefers-reduced-motion` setting
 - Animations are disabled for users who prefer reduced motion
 
@@ -313,18 +322,24 @@ All dashboard styling includes responsive breakpoints:
 The dashboard styling uses the existing CSS Variables system:
 
 ### Primary Variables
+
 ```css
---primary: 173 58% 39%;              /* Teal green */
---primary-foreground: 0 0% 100%;     /* White */
---success: 152 60% 40%;              /* Green */
---warning: 38 92% 50%;               /* Orange/Amber */
---destructive: 0 72% 51%;            /* Red */
---emergency: 0 84% 60%;              /* Bright red */
+--primary: 173 58% 39%; /* Teal green */
+--primary-foreground: 0 0% 100%; /* White */
+--success: 152 60% 40%; /* Green */
+--warning: 38 92% 50%; /* Orange/Amber */
+--destructive: 0 72% 51%; /* Red */
+--emergency: 0 84% 60%; /* Bright red */
 ```
 
 ### Using Variables in Custom CSS
+
 ```css
-background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+background: linear-gradient(
+  135deg,
+  hsl(var(--primary)),
+  hsl(var(--primary) / 0.6)
+);
 color: hsl(var(--primary-foreground));
 border-color: hsl(var(--border));
 ```
@@ -334,15 +349,19 @@ border-color: hsl(var(--border));
 ## Implementation Examples
 
 ### Full Patient Dashboard
+
 See [src/pages/patient/PatientOverview.js](../pages/patient/PatientOverview.js)
 
 ### Full Doctor Dashboard
+
 See [src/pages/doctor/DoctorOverview.js](../pages/doctor/DoctorOverview.js)
 
 ### Full Admin Dashboard
+
 See [src/pages/admin/AdminOverview.js](../pages/admin/AdminOverview.js)
 
 ### Layout Component
+
 See [src/components/DashboardLayout.js](../components/DashboardLayout.js)
 
 ---
@@ -352,14 +371,20 @@ See [src/components/DashboardLayout.js](../components/DashboardLayout.js)
 ### When Adding New Components
 
 1. **Use Semantic Class Names**
+
    ```css
    .patient-card          /* Good */
    .p-card                /* Less descriptive */
    ```
 
 2. **Follow Gradient Patterns**
+
    ```css
-   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+   background: linear-gradient(
+     135deg,
+     hsl(var(--primary)),
+     hsl(var(--primary) / 0.8)
+   );
    ```
 
 3. **Maintain Spacing Consistency**
@@ -368,9 +393,10 @@ See [src/components/DashboardLayout.js](../components/DashboardLayout.js)
    - Border radius: var(--radius) for consistency
 
 4. **Use CSS Variables for Colors**
+
    ```css
-   color: hsl(var(--foreground));      /* Good */
-   color: #000;                         /* Avoid hardcoding */
+   color: hsl(var(--foreground)); /* Good */
+   color: #000; /* Avoid hardcoding */
    ```
 
 5. **Test Responsive Behavior**
@@ -388,7 +414,7 @@ Edit [src/styles/dashboards.css](./dashboards.css) and update:
 
 ```css
 .patient-dashboard {
-  --dashboard-primary: 173 58% 39%;  /* Change this HSL value */
+  --dashboard-primary: 173 58% 39%; /* Change this HSL value */
 }
 ```
 
@@ -406,6 +432,7 @@ Update the `.admin-stat-card`, `.doctor-stat-card`, or `.patient-stat-card` clas
 ### To Add New Role Dashboard
 
 1. Create role-specific CSS section:
+
    ```css
    .nurse-dashboard {
      --dashboard-primary: /* HSL value */;
@@ -446,18 +473,21 @@ Update the `.admin-stat-card`, `.doctor-stat-card`, or `.patient-stat-card` clas
 ## Troubleshooting
 
 ### Styles Not Appearing
+
 1. Clear browser cache (Ctrl+Shift+Delete)
 2. Verify `src/styles/dashboards.css` exists
 3. Check index.css has import: `@import './styles/dashboards.css';`
 4. Restart dev server: `npm start`
 
 ### Classes Not Working
+
 1. Verify class names match exactly (case-sensitive)
 2. Check CSS selector specificity
 3. Use browser DevTools to inspect computed styles
 4. Ensure parent classes are applied correctly
 
 ### Mobile Layout Issues
+
 1. Check viewport meta tag in public/index.html
 2. Test with DevTools mobile emulation
 3. Verify media query breakpoints

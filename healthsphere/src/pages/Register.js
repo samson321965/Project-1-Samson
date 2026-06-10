@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { Mail, Lock, User, Phone, MapPin, Calendar, AlertCircle } from 'lucide-react';
+import {
+  Mail,
+  Lock,
+  User,
+  Phone,
+  MapPin,
+  Calendar,
+  AlertCircle,
+} from 'lucide-react';
 import LogoImage from '../image/Logo.png';
 import './Register.css';
 
@@ -19,7 +27,7 @@ export default function Register() {
     allergies: '',
     medicalHistory: '',
     emergencyContactName: '',
-    emergencyContactNumber: ''
+    emergencyContactNumber: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,7 +37,7 @@ export default function Register() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -103,7 +111,11 @@ export default function Register() {
         <div className="register-card-container">
           <div className="register-header">
             <div className="register-logo">
-              <img src={LogoImage} alt="HealthSphere Logo" className="app-logo" />
+              <img
+                src={LogoImage}
+                alt="HealthSphere Logo"
+                className="app-logo"
+              />
             </div>
             <h1>HealthSphere</h1>
             <p>Create your patient account</p>
@@ -267,7 +279,9 @@ export default function Register() {
 
               <div className="register-form-row">
                 <div className="register-form-group">
-                  <label className="register-label">Emergency Contact Name (optional)</label>
+                  <label className="register-label">
+                    Emergency Contact Name (optional)
+                  </label>
                   <div className="register-input-wrapper">
                     <User />
                     <input
@@ -282,7 +296,9 @@ export default function Register() {
                 </div>
 
                 <div className="register-form-group">
-                  <label className="register-label">Emergency Contact Number (optional)</label>
+                  <label className="register-label">
+                    Emergency Contact Number (optional)
+                  </label>
                   <div className="register-input-wrapper">
                     <Phone />
                     <input
@@ -311,7 +327,9 @@ export default function Register() {
                 </div>
 
                 <div className="register-form-group">
-                  <label className="register-label">Medical History (optional)</label>
+                  <label className="register-label">
+                    Medical History (optional)
+                  </label>
                   <textarea
                     name="medicalHistory"
                     value={formData.medicalHistory}
@@ -330,9 +348,25 @@ export default function Register() {
               >
                 {loading ? (
                   <>
-                    <svg className="register-spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="register-spinner"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Creating Account...
                   </>
@@ -344,7 +378,12 @@ export default function Register() {
           </div>
 
           <div className="register-footer">
-            <p>Already have an account? <Link to="/" className="register-link">Sign In</Link></p>
+            <p>
+              Already have an account?{' '}
+              <Link to="/" className="register-link">
+                Sign In
+              </Link>
+            </p>
           </div>
         </div>
       </div>

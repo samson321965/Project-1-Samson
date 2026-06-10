@@ -97,7 +97,9 @@ const createTables = async () => {
     await db.query(queryText);
     console.log('Tables created successfully!');
   } catch (err) {
-    console.error('Error creating tables. Check your database connection details in .env');
+    console.error(
+      'Error creating tables. Check your database connection details in .env'
+    );
     console.error(err.stack);
   } finally {
     process.exit(0);

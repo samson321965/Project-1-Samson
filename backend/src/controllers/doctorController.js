@@ -4,7 +4,9 @@ exports.getAppointments = async (req, res) => {
   const doctorId = req.params.id;
 
   if (isNaN(doctorId)) {
-    return res.status(400).json({ message: "Invalid doctor ID. ID must be a number." });
+    return res
+      .status(400)
+      .json({ message: 'Invalid doctor ID. ID must be a number.' });
   }
 
   try {
@@ -19,11 +21,11 @@ exports.getAppointments = async (req, res) => {
       WHERE a.doctor_id = $1
       ORDER BY a.appointment_date ASC
     `;
-    
+
     const result = await db.query(query, [doctorId]);
 
     // Format appointments to match what the frontend expects
-    const formattedAppointments = result.rows.map(row => {
+    const formattedAppointments = result.rows.map((row) => {
       // Split postgres timestamp into date and time
       const dateObj = new Date(row.appointment_date);
       const date = dateObj.toISOString().split('T')[0];
@@ -37,23 +39,27 @@ exports.getAppointments = async (req, res) => {
         date: date,
         time: time,
         reason: row.reason || 'Follow-up',
-        status: row.status
+        status: row.status,
       };
     });
 
     res.json(formattedAppointments);
   } catch (error) {
     console.error('Error fetching appointments:', error);
-    res.status(500).json({ message: 'Server error while fetching appointments' });
+    res
+      .status(500)
+      .json({ message: 'Server error while fetching appointments' });
   }
 };
 
 exports.getPatients = async (req, res) => {
   const doctorId = req.params.id;
-  if (isNaN(doctorId)) return res.status(400).json({ message: 'Invalid doctor ID' });
+  if (isNaN(doctorId))
+    return res.status(400).json({ message: 'Invalid doctor ID' });
 
   try {
-    const result = await db.query(`
+    const result = await db.query(
+      `
       SELECT DISTINCT
         u.id, u.full_name AS name, u.email,
         p.contact_number AS phone,
@@ -67,7 +73,9 @@ exports.getPatients = async (req, res) => {
       JOIN users u ON p.user_id = u.id
       WHERE a.doctor_id = $1
       ORDER BY u.full_name ASC
-    `, [doctorId]);
+    `,
+      [doctorId]
+    );
 
     res.json(result.rows);
   } catch (error) {

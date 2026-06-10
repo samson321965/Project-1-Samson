@@ -35,7 +35,7 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -98,14 +98,14 @@
 }
 
 .doctor-schedule-date-input:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
   background: white;
 }
 
 .doctor-schedule-clear-btn {
   padding: 0.5rem 1rem;
-  color: #4CAF50;
+  color: #4caf50;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -322,7 +322,7 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

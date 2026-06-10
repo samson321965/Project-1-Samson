@@ -232,11 +232,11 @@
   .data-table-hide-mobile {
     display: none;
   }
-  
+
   .data-table {
     font-size: 0.75rem;
   }
-  
+
   .data-table th,
   .data-table td {
     padding: 0.75rem 0.5rem;
@@ -391,7 +391,11 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.6)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -600,7 +604,11 @@
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.6)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -925,7 +933,11 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.6)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1035,32 +1047,32 @@
   .page-header {
     margin-bottom: 1rem;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }
-  
+
   .records-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .patient-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-  
+
   .form-card-body {
     grid-template-columns: 1fr;
   }
-  
+
   .appointment-form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .data-table-actions {
     flex-direction: column;
     gap: 0.25rem;
   }
-  
+
   .data-table-action-btn {
     width: 100%;
     justify-content: center;
@@ -1071,29 +1083,29 @@
   .page-title {
     font-size: 1.25rem;
   }
-  
+
   .data-table {
     font-size: 0.75rem;
   }
-  
+
   .data-table th,
   .data-table td {
     padding: 0.5rem 0.25rem;
   }
-  
+
   .btn {
     padding: 0.5rem 1rem;
     font-size: 0.75rem;
   }
-  
+
   .card {
     padding: 1rem;
   }
-  
+
   .list-item {
     padding: 0.75rem;
   }
-  
+
   .form-card {
     padding: 1rem;
   }

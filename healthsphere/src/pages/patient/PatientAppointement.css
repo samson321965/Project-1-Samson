@@ -46,7 +46,7 @@
 .patient-appointments-title-group h1 {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -63,7 +63,7 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -79,7 +79,7 @@
 
 .patient-appointments-book-btn {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #388e3c 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -202,7 +202,7 @@
 
 .patient-appointments-input:focus,
 .patient-appointments-select:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
   background: white;
 }
@@ -210,7 +210,7 @@
 .patient-appointments-confirm-btn {
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #388e3c 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -354,7 +354,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -380,7 +380,9 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .book-appointment-btn:hover {
@@ -467,7 +469,7 @@
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #4CAF50;
+  border-bottom: 2px solid #4caf50;
   padding-bottom: 1rem;
 }
 
@@ -489,15 +491,29 @@
   animation: fadeIn 0.6s ease backwards;
 }
 
-.booking-form-group:nth-child(1) { animation-delay: 0.3s; }
-.booking-form-group:nth-child(2) { animation-delay: 0.4s; }
-.booking-form-group:nth-child(3) { animation-delay: 0.5s; }
-.booking-form-group:nth-child(4) { animation-delay: 0.6s; }
-.booking-form-group:nth-child(5) { animation-delay: 0.7s; }
+.booking-form-group:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.booking-form-group:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.booking-form-group:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.booking-form-group:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.booking-form-group:nth-child(5) {
+  animation-delay: 0.7s;
+}
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .booking-label {
@@ -534,7 +550,7 @@
 
 .booking-input:focus,
 .booking-select:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   background: white;
   box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
 }
@@ -552,7 +568,7 @@
 .confirm-booking-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -577,7 +593,9 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .confirm-booking-btn:hover {
@@ -797,6 +815,6 @@
 .book-appointment-btn:focus-visible,
 .confirm-booking-btn:focus-visible,
 .cancel-appointment-link:focus-visible {
-  outline: 2px solid #4CAF50;
+  outline: 2px solid #4caf50;
   outline-offset: 2px;
 }

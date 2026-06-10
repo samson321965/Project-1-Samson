@@ -12,10 +12,10 @@ const pool = new Pool({
 async function fixStaff() {
   try {
     console.log('Converting staff table to view...');
-    
+
     // Drop existing table
     await pool.query('DROP TABLE IF EXISTS staff CASCADE');
-    
+
     // Ensure roles exist
     await pool.query(`
       CREATE TABLE IF NOT EXISTS roles (
@@ -23,7 +23,7 @@ async function fixStaff() {
         role_name VARCHAR(50) UNIQUE NOT NULL
       )
     `);
-    
+
     await pool.query(`
       INSERT INTO roles (role_name) 
       VALUES ('Admin'), ('Doctor'), ('Nurse'), ('Patient')
@@ -48,11 +48,12 @@ async function fixStaff() {
       WHERE u.role IN ('doctor', 'nurse', 'admin')
     `);
 
-    console.log('Done! You can now run "select * from staff" and see the results.');
-    
+    console.log(
+      'Done! You can now run "select * from staff" and see the results.'
+    );
+
     const check = await pool.query('SELECT * FROM staff');
     console.log(`Staff count: ${check.rowCount}`);
-
   } catch (err) {
     console.error('Error:', err.message);
   } finally {

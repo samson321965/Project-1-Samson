@@ -18,9 +18,10 @@ export default function PatientProfile() {
     const fetchProfile = async () => {
       try {
         // Use the logged-in patient's DB id, fallback to 5 (John Doe) for demo
-        const patientId = currentUser?.role === 'patient' && !isNaN(currentUser?.id)
-          ? currentUser.id
-          : 5;
+        const patientId =
+          currentUser?.role === 'patient' && !isNaN(currentUser?.id)
+            ? currentUser.id
+            : 5;
 
         const res = await fetch(`${API_URL}/api/patients/${patientId}/records`);
         if (!res.ok) throw new Error('Failed to fetch profile');
@@ -39,12 +40,16 @@ export default function PatientProfile() {
 
   const handleSave = async () => {
     setError('');
-    if (!phone.trim()) { setError('Phone is required'); return; }
+    if (!phone.trim()) {
+      setError('Phone is required');
+      return;
+    }
 
     try {
-      const patientId = currentUser?.role === 'patient' && !isNaN(currentUser?.id)
-        ? currentUser.id
-        : 5;
+      const patientId =
+        currentUser?.role === 'patient' && !isNaN(currentUser?.id)
+          ? currentUser.id
+          : 5;
 
       const res = await fetch(`${API_URL}/api/admin/patients/${patientId}`, {
         method: 'PUT',
@@ -54,12 +59,12 @@ export default function PatientProfile() {
           email: profile.email,
           phone,
           dob: profile.date_of_birth,
-          bloodType: profile.blood_type
-        })
+          bloodType: profile.blood_type,
+        }),
       });
 
       if (res.ok) {
-        setProfile(prev => ({ ...prev, contact_number: phone }));
+        setProfile((prev) => ({ ...prev, contact_number: phone }));
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
       } else {
@@ -70,15 +75,20 @@ export default function PatientProfile() {
     }
   };
 
-  if (loading) return <p className="text-muted-foreground">Loading profile...</p>;
-  if (error && !profile) return <p className="text-muted-foreground">{error}</p>;
-  if (!profile) return <p className="text-muted-foreground">Patient not found</p>;
+  if (loading)
+    return <p className="text-muted-foreground">Loading profile...</p>;
+  if (error && !profile)
+    return <p className="text-muted-foreground">{error}</p>;
+  if (!profile)
+    return <p className="text-muted-foreground">Patient not found</p>;
 
   return (
     <div className="patient-profile-container">
       <div className="page-header">
         <h1 className="page-title">My Profile</h1>
-        <p className="page-subtitle">View and update your personal information</p>
+        <p className="page-subtitle">
+          View and update your personal information
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -89,7 +99,7 @@ export default function PatientProfile() {
           </div>
           <h2 className="profile-name">{profile.full_name}</h2>
           <p className="profile-email">{profile.email}</p>
-          
+
           <div className="profile-info-grid">
             <div className="profile-info-item">
               <span className="profile-info-label">DOB</span>
@@ -101,15 +111,21 @@ export default function PatientProfile() {
             </div>
             <div className="profile-info-item">
               <span className="profile-info-label">Blood Type</span>
-              <span className="profile-info-value">{profile.blood_type || '—'}</span>
+              <span className="profile-info-value">
+                {profile.blood_type || '—'}
+              </span>
             </div>
             <div className="profile-info-item">
               <span className="profile-info-label">Emergency</span>
-              <span className="profile-info-value">{profile.emergency_contact_name || '—'}</span>
+              <span className="profile-info-value">
+                {profile.emergency_contact_name || '—'}
+              </span>
             </div>
             <div className="profile-info-item">
               <span className="profile-info-label">Emerg. #</span>
-              <span className="profile-info-value">{profile.emergency_contact_number || '—'}</span>
+              <span className="profile-info-value">
+                {profile.emergency_contact_number || '—'}
+              </span>
             </div>
           </div>
         </div>
@@ -124,7 +140,7 @@ export default function PatientProfile() {
               <span>{error}</span>
             </div>
           )}
-          
+
           {saved && (
             <div className="profile-success-alert">
               <Save className="profile-alert-icon" />
@@ -134,26 +150,23 @@ export default function PatientProfile() {
 
           <div className="profile-form-group">
             <label className="profile-label">Phone</label>
-            <input 
-              value={phone} 
-              onChange={e => setPhone(e.target.value)}
+            <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="profile-input"
               placeholder="Enter your phone number"
             />
           </div>
           <div className="profile-form-group">
             <label className="profile-label">Address</label>
-            <input 
+            <input
               value={address}
-              onChange={e => setAddress(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}
               className="profile-input"
               placeholder="Enter your address"
             />
           </div>
-          <button 
-            onClick={handleSave}
-            className="profile-save-button"
-          >
+          <button onClick={handleSave} className="profile-save-button">
             Save Changes
           </button>
         </div>

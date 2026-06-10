@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { Mail, MessageSquare, AlertCircle, CheckCircle, ArrowLeft, Send, Search, Clock } from 'lucide-react';
+import {
+  Mail,
+  MessageSquare,
+  AlertCircle,
+  CheckCircle,
+  ArrowLeft,
+  Send,
+  Search,
+  Clock,
+} from 'lucide-react';
 import LogoImage from '../image/Logo.png';
 import './ForgotPassword.css';
 
@@ -27,9 +36,15 @@ export default function HelpDesk() {
     }
 
     try {
-      const result = await submitHelpRequest(email, 'Password Reset Request', message);
+      const result = await submitHelpRequest(
+        email,
+        'Password Reset Request',
+        message
+      );
       if (result.success) {
-        setSuccess('Your request has been sent to the Help Desk. Our admin will review it shortly.');
+        setSuccess(
+          'Your request has been sent to the Help Desk. Our admin will review it shortly.'
+        );
         setMessage('');
       } else {
         setError(result.message);
@@ -71,26 +86,38 @@ export default function HelpDesk() {
         <div className="forgot-card-container">
           <div className="forgot-header">
             <div className="forgot-logo">
-              <img src={LogoImage} alt="HealthSphere Logo" className="app-logo" />
+              <img
+                src={LogoImage}
+                alt="HealthSphere Logo"
+                className="app-logo"
+              />
             </div>
             <h1>Help Desk Support</h1>
             <p>
-              {view === 'request' 
-                ? "Send a message to our administrators for assistance" 
-                : "Enter your email to check the status of your requests"}
+              {view === 'request'
+                ? 'Send a message to our administrators for assistance'
+                : 'Enter your email to check the status of your requests'}
             </p>
           </div>
 
           <div className="view-toggle">
-            <button 
-              className={view === 'request' ? 'active' : ''} 
-              onClick={() => { setView('request'); setError(''); setSuccess(''); }}
+            <button
+              className={view === 'request' ? 'active' : ''}
+              onClick={() => {
+                setView('request');
+                setError('');
+                setSuccess('');
+              }}
             >
               Submit Request
             </button>
-            <button 
-              className={view === 'status' ? 'active' : ''} 
-              onClick={() => { setView('status'); setError(''); setSuccess(''); }}
+            <button
+              className={view === 'status' ? 'active' : ''}
+              onClick={() => {
+                setView('status');
+                setError('');
+                setSuccess('');
+              }}
             >
               Check Status
             </button>
@@ -117,10 +144,10 @@ export default function HelpDesk() {
                   <label className="login-label">Email Address</label>
                   <div className="login-input-wrapper">
                     <Mail />
-                    <input 
-                      type="email" 
-                      value={email} 
-                      onChange={e => setEmail(e.target.value)}
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="login-input"
                       placeholder="your.email@example.com"
                       required
@@ -131,9 +158,9 @@ export default function HelpDesk() {
                   <label className="login-label">Message</label>
                   <div className="login-input-wrapper textarea-wrapper">
                     <MessageSquare className="textarea-icon" />
-                    <textarea 
-                      value={message} 
-                      onChange={e => setMessage(e.target.value)}
+                    <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className="login-input login-textarea"
                       placeholder="Example: I forgot my password. Can you please reset it? My name is..."
                       rows="4"
@@ -141,7 +168,11 @@ export default function HelpDesk() {
                     ></textarea>
                   </div>
                 </div>
-                <button type="submit" disabled={loading} className="login-button">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="login-button"
+                >
                   <Send size={18} />
                   {loading ? 'Sending...' : 'Send to Admin'}
                 </button>
@@ -151,29 +182,35 @@ export default function HelpDesk() {
                 <form onSubmit={handleCheckStatus} className="status-search">
                   <div className="login-input-wrapper">
                     <Mail />
-                    <input 
-                      type="email" 
-                      value={email} 
-                      onChange={e => setEmail(e.target.value)}
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="login-input"
                       placeholder="Enter your email"
                       required
                     />
-                    <button type="submit" disabled={loading} className="search-btn">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="search-btn"
+                    >
                       <Search size={18} />
                     </button>
                   </div>
                 </form>
 
                 <div className="request-list">
-                  {requests.map(req => (
+                  {requests.map((req) => (
                     <div key={req.id} className={`request-item ${req.status}`}>
                       <div className="request-item-header">
                         <span className="request-date">
                           <Clock size={12} />
                           {new Date(req.created_at).toLocaleDateString()}
                         </span>
-                        <span className={`status-badge ${req.status}`}>{req.status}</span>
+                        <span className={`status-badge ${req.status}`}>
+                          {req.status}
+                        </span>
                       </div>
                       <div className="request-message">
                         <strong>Your Message:</strong>
