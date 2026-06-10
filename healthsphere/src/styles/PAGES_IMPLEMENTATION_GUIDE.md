@@ -9,6 +9,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ## 📋 CSS Classes Summary
 
 ### Form Elements
+
 ```css
 .form-group           /* Wrapper for input groups */
 .form-label           /* Label styling */
@@ -20,6 +21,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 ### Buttons
+
 ```css
 .btn                  /* Base button */
 .btn-primary          /* Primary action */
@@ -31,6 +33,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 ### Tables
+
 ```css
 .data-table           /* Main table */
 .data-table-actions   /* Action buttons container */
@@ -39,6 +42,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 ### Cards & Lists
+
 ```css
 .card                 /* Card container */
 .card-header          /* Card header */
@@ -50,6 +54,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 ### Status Elements
+
 ```css
 .badge                /* Badge container */
 .badge-primary/success/warning/destructive /* Badge variants */
@@ -61,27 +66,24 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ## 🎯 Page-by-Page Implementation
 
 ### 1. LOGIN PAGE
+
 **File:** `src/pages/Login.js`
 
 **CSS Classes to Apply:**
+
 ```jsx
 // Container
 <div className="min-h-screen flex items-center justify-center bg-background">
   <div className="w-full max-w-md px-4">
-    
     // Card
     <div className="card">
-      
       // Form groups
       <div className="form-group">
         <label className="form-label">Email</label>
         <input className="form-input" type="email" />
       </div>
-      
       // Button
-      <button className="btn btn-primary btn-lg w-full">
-        Sign In
-      </button>
+      <button className="btn btn-primary btn-lg w-full">Sign In</button>
     </div>
   </div>
 </div>
@@ -92,17 +94,20 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ### 2. PATIENT PAGES
 
 #### PatientOverview.js ✅
+
 **Status:** Already styled with patient-specific classes
 
 #### PatientAppointement.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="patient-dashboard">
   <div className="page-header-actions">
     <h1 className="page-title">Appointments</h1>
     <button className="btn btn-primary">Book Appointment</button>
   </div>
-  
+
   {/* Form */}
   <div className="appointment-form-wrapper">
     <form className="appointment-form-grid">
@@ -112,7 +117,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
       </div>
     </form>
   </div>
-  
+
   {/* Table */}
   <div className="card">
     <table className="data-table">
@@ -128,7 +133,9 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
           <td>Dr. Smith</td>
           <td>2024-04-20</td>
           <td className="data-table-actions">
-            <button className="data-table-action-btn data-table-action-success">Complete</button>
+            <button className="data-table-action-btn data-table-action-success">
+              Complete
+            </button>
           </td>
         </tr>
       </tbody>
@@ -138,26 +145,28 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### PatientProfile.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="patient-dashboard">
   <div className="page-header">
     <h1 className="page-title">My Profile</h1>
   </div>
-  
+
   <div className="profile-container">
     {/* Left side - Info */}
     <div className="profile-info-card">
       <div className="profile-avatar">AB</div>
       <h2 className="profile-name">Alice Brown</h2>
       <p className="profile-role">patient</p>
-      
+
       <div className="profile-info-item">
         <p className="profile-info-label">Email</p>
         <p className="profile-info-value">alice@example.com</p>
       </div>
     </div>
-    
+
     {/* Right side - Edit Form */}
     <div className="profile-edit-form">
       <div className="profile-form-section">
@@ -175,19 +184,21 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### PatientRecord.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="patient-dashboard">
   <div className="page-header">
     <h1 className="page-title">Medical Records</h1>
   </div>
-  
+
   <div className="records-grid">
     <div className="records-card">
       <div className="records-card-header">
         <h3 className="records-card-title">Medical History</h3>
       </div>
-      
+
       <div className="records-item">
         <div className="records-item-icon">
           <Heart size={18} />
@@ -198,7 +209,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
         </div>
       </div>
     </div>
-    
+
     <div className="records-card">
       <div className="records-card-header">
         <h3 className="records-card-title">Allergies</h3>
@@ -211,17 +222,22 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### PatientNotifications.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="patient-dashboard">
   <div className="page-header-actions">
     <h1 className="page-title">Notifications</h1>
     <button className="btn btn-secondary btn-sm">Mark All Read</button>
   </div>
-  
+
   <div className="notifications-container">
-    {notifications.map(n => (
-      <div key={n.id} className={`notification-item ${n.type} ${n.read ? '' : 'unread'}`}>
+    {notifications.map((n) => (
+      <div
+        key={n.id}
+        className={`notification-item ${n.type} ${n.read ? '' : 'unread'}`}
+      >
         <div className="notification-icon">
           <Bell size={18} />
         </div>
@@ -241,17 +257,20 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ### 3. DOCTOR PAGES
 
 #### DoctorOverview.js ✅
+
 **Status:** Already styled with doctor-specific classes
 
 #### DoctorAppointements.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="doctor-dashboard">
   <div className="page-header">
     <h1 className="page-title">Appointments</h1>
     <p className="page-subtitle">Manage patient appointments</p>
   </div>
-  
+
   <div className="card">
     <table className="data-table">
       <thead>
@@ -265,20 +284,22 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
         </tr>
       </thead>
       <tbody>
-        {appointments.map(apt => (
+        {appointments.map((apt) => (
           <tr key={apt.id}>
             <td>{apt.patientName}</td>
             <td>{apt.date}</td>
             <td>{apt.time}</td>
             <td>{apt.reason}</td>
             <td>
-              <span className={`badge badge-${apt.status}`}>
-                {apt.status}
-              </span>
+              <span className={`badge badge-${apt.status}`}>{apt.status}</span>
             </td>
             <td className="data-table-actions">
-              <button className="data-table-action-btn data-table-action-success">Complete</button>
-              <button className="data-table-action-btn data-table-action-delete">Cancel</button>
+              <button className="data-table-action-btn data-table-action-success">
+                Complete
+              </button>
+              <button className="data-table-action-btn data-table-action-delete">
+                Cancel
+              </button>
             </td>
           </tr>
         ))}
@@ -289,38 +310,45 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### DoctorPatients.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="doctor-dashboard">
   <div className="page-header">
     <h1 className="page-title">My Patients</h1>
   </div>
-  
+
   {/* Search */}
   <div className="card mb-6">
     <div className="search-wrapper">
       <Search size={18} className="search-icon" />
-      <input 
-        type="text" 
-        placeholder="Search patients..." 
+      <input
+        type="text"
+        placeholder="Search patients..."
         className="search-input"
       />
     </div>
   </div>
-  
+
   {/* Patient Grid */}
   <div className="patient-grid">
-    {patients.map(p => (
-      <div 
-        key={p.id} 
+    {patients.map((p) => (
+      <div
+        key={p.id}
         className="patient-card-item"
         onClick={() => handleSelectPatient(p.id)}
       >
         <div className="patient-card-avatar">
-          {p.name.split(' ').map(n => n[0]).join('')}
+          {p.name
+            .split(' ')
+            .map((n) => n[0])
+            .join('')}
         </div>
         <h3 className="patient-card-name">{p.name}</h3>
-        <p className="patient-card-info">{p.gender} • {p.bloodType}</p>
+        <p className="patient-card-info">
+          {p.gender} • {p.bloodType}
+        </p>
       </div>
     ))}
   </div>
@@ -328,13 +356,15 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### DoctorSchedule.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="doctor-dashboard">
   <div className="page-header">
     <h1 className="page-title">My Schedule</h1>
   </div>
-  
+
   {/* Filter */}
   <div className="schedule-filter-wrapper">
     <div>
@@ -345,7 +375,7 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
       </div>
     </div>
   </div>
-  
+
   {/* Schedule Table */}
   <div className="card">
     <table className="data-table">
@@ -364,13 +394,15 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### DoctorEmergency.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="doctor-dashboard">
   <div className="page-header">
     <h1 className="page-title">Emergency Mode</h1>
   </div>
-  
+
   <div className="card mb-6">
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
       <AlertTriangle size={32} className="text-emergency" />
@@ -383,10 +415,10 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
       <button className="btn btn-destructive">Activate</button>
     </div>
   </div>
-  
+
   {emergencyMode && (
     <div className="patient-grid">
-      {allPatients.map(p => (
+      {allPatients.map((p) => (
         <div key={p.id} className="patient-card-item">
           {/* Patient card content */}
         </div>
@@ -401,16 +433,19 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ### 4. ADMIN PAGES
 
 #### AdminOverview.js ✅
+
 **Status:** Already styled with admin-specific classes
 
 #### AdminAppointement.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="admin-dashboard">
   <div className="page-header">
     <h1 className="page-title">All Appointments</h1>
   </div>
-  
+
   <div className="card">
     <table className="data-table">
       <thead>
@@ -423,15 +458,13 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
         </tr>
       </thead>
       <tbody>
-        {appointments.map(apt => (
+        {appointments.map((apt) => (
           <tr key={apt.id}>
             <td>{apt.patientName}</td>
             <td>{apt.doctorName}</td>
             <td>{apt.date}</td>
             <td>
-              <span className={`badge badge-${apt.status}`}>
-                {apt.status}
-              </span>
+              <span className={`badge badge-${apt.status}`}>{apt.status}</span>
             </td>
             <td className="data-table-actions">
               <button className="data-table-action-btn data-table-action-edit">
@@ -450,21 +483,23 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### AdminPatients.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="admin-dashboard">
   <div className="page-header-actions">
     <h1 className="page-title">Patients</h1>
     <button className="btn btn-primary">Add Patient</button>
   </div>
-  
+
   {/* Add/Edit Form */}
   <div className="form-card">
     <div className="form-card-header" onClick={() => setFormOpen(!formOpen)}>
       <h3 className="form-card-title">Add New Patient</h3>
       <div className="form-card-toggle"></div>
     </div>
-    
+
     <div className="form-card-content">
       <form className="form-card-body">
         <div className="form-group">
@@ -482,15 +517,19 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
       </div>
     </div>
   </div>
-  
+
   {/* Search */}
   <div className="card mb-6">
     <div className="search-wrapper">
       <Search size={18} className="search-icon" />
-      <input type="text" placeholder="Search patients..." className="search-input" />
+      <input
+        type="text"
+        placeholder="Search patients..."
+        className="search-input"
+      />
     </div>
   </div>
-  
+
   {/* Patients Table */}
   <div className="card">
     <table className="data-table">
@@ -509,19 +548,19 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### AdminStaffs.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="admin-dashboard">
   <div className="page-header-actions">
     <h1 className="page-title">Staff Members</h1>
     <button className="btn btn-primary">Add Staff</button>
   </div>
-  
+
   {/* Form - Same pattern as AdminPatients */}
-  <div className="form-card">
-    {/* Form fields */}
-  </div>
-  
+  <div className="form-card">{/* Form fields */}</div>
+
   {/* Staff Table */}
   <div className="card">
     <table className="data-table">
@@ -540,36 +579,35 @@ All CSS classes are now available in `src/styles/pages.css`. This guide shows ho
 ```
 
 #### AdminEmergency.js
+
 **CSS Classes:**
 Same pattern as DoctorEmergency.js but with admin-dashboard class
 
 #### AdminReports.js
+
 **CSS Classes:**
+
 ```jsx
 <div className="admin-dashboard">
   <div className="page-header">
     <h1 className="page-title">Reports & Analytics</h1>
   </div>
-  
+
   <div className="admin-content-grid">
     <div className="admin-section">
       <h2>Appointments per Day</h2>
       <div className="admin-chart-container">
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData}>
-            {/* Chart */}
-          </BarChart>
+          <BarChart data={chartData}>{/* Chart */}</BarChart>
         </ResponsiveContainer>
       </div>
     </div>
-    
+
     <div className="admin-section">
       <h2>Staff Workload</h2>
       <div className="admin-chart-container">
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={workloadData}>
-            {/* Chart */}
-          </BarChart>
+          <BarChart data={workloadData}>{/* Chart */}</BarChart>
         </ResponsiveContainer>
       </div>
     </div>
@@ -582,11 +620,13 @@ Same pattern as DoctorEmergency.js but with admin-dashboard class
 ## 🚀 Quick Reference
 
 ### Always Include
+
 1. **Role wrapper class**: `patient-dashboard`, `doctor-dashboard`, or `admin-dashboard`
 2. **Page structure**: `page-header`, `page-title`, `page-subtitle`
 3. **Form validation**: Use `form-error-alert` for errors
 
 ### Common Patterns
+
 ```jsx
 // Form Group
 <div className="form-group">
@@ -620,6 +660,7 @@ Same pattern as DoctorEmergency.js but with admin-dashboard class
 ---
 
 ## 📱 Responsive Notes
+
 - All components are mobile-first responsive
 - Tables hide columns automatically on mobile (use `.data-table-hide-mobile`)
 - Forms stack vertically on mobile
@@ -629,6 +670,7 @@ Same pattern as DoctorEmergency.js but with admin-dashboard class
 ---
 
 ## ✨ Features
+
 - ✅ Consistent styling across all pages
 - ✅ Light/Dark mode support (via CSS variables)
 - ✅ Smooth animations and transitions
