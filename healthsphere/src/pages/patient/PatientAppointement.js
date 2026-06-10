@@ -19,16 +19,19 @@ export default function PatientAppointments() {
   const [loading, setLoading] = useState(true);
 
   // Use the logged-in patient's DB id; fallback to 5 (John Doe) for demo
-  const patientId = currentUser?.role === 'patient' && !isNaN(currentUser?.id)
-    ? currentUser.id
-    : 5;
+  const patientId =
+    currentUser?.role === 'patient' && !isNaN(currentUser?.id)
+      ? currentUser.id
+      : 5;
 
   // Fetch patient's appointments and available doctors from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Load this patient's appointments
-        const aptsRes = await fetch(`${API_URL}/api/appointments/patient/${patientId}`);
+        const aptsRes = await fetch(
+          `${API_URL}/api/appointments/patient/${patientId}`
+        );
         const aptsData = await aptsRes.json();
         if (Array.isArray(aptsData)) setMyAppointments(aptsData);
 
@@ -36,7 +39,7 @@ export default function PatientAppointments() {
         const staffRes = await fetch(`${API_URL}/api/admin/staff`);
         const staffData = await staffRes.json();
         if (Array.isArray(staffData)) {
-          setDoctors(staffData.filter(s => s.role === 'doctor'));
+          setDoctors(staffData.filter((s) => s.role === 'doctor'));
         }
       } catch (err) {
         console.error('Failed to load data:', err);
@@ -53,10 +56,22 @@ export default function PatientAppointments() {
     setSuccess('');
 
     // Validation
-    if (!doctor) { setError('Please select a doctor'); return; }
-    if (!date) { setError('Please select a date'); return; }
-    if (!time) { setError('Please select a time'); return; }
-    if (!reason.trim()) { setError('Please enter a reason'); return; }
+    if (!doctor) {
+      setError('Please select a doctor');
+      return;
+    }
+    if (!date) {
+      setError('Please select a date');
+      return;
+    }
+    if (!time) {
+      setError('Please select a time');
+      return;
+    }
+    if (!reason.trim()) {
+      setError('Please enter a reason');
+      return;
+    }
 
     if (new Date(date) < new Date(new Date().toISOString().split('T')[0])) {
       setError('Cannot book past dates');
@@ -72,21 +87,29 @@ export default function PatientAppointments() {
           doctorId: parseInt(doctor),
           date,
           time,
-          reason
-        })
+          reason,
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         // Find doctor name for immediate UI update
-        const selectedDoctor = doctors.find(d => String(d.id) === String(doctor));
-        const newApt = { ...data, doctorName: selectedDoctor?.name || 'Doctor' };
+        const selectedDoctor = doctors.find(
+          (d) => String(d.id) === String(doctor)
+        );
+        const newApt = {
+          ...data,
+          doctorName: selectedDoctor?.name || 'Doctor',
+        };
 
-        setMyAppointments(prev => [newApt, ...prev]);
+        setMyAppointments((prev) => [newApt, ...prev]);
         setSuccess('Appointment booked successfully!');
         setShowForm(false);
-        setDoctor(''); setDate(''); setTime(''); setReason('');
+        setDoctor('');
+        setDate('');
+        setTime('');
+        setReason('');
         setTimeout(() => setSuccess(''), 3000);
       } else {
         setError(data.message || 'Failed to book appointment');
@@ -101,17 +124,20 @@ export default function PatientAppointments() {
     // Only call API if id is a real DB integer
     if (!isNaN(id)) {
       try {
-        await fetch(`${API_URL}/api/appointments/${id}/cancel`, { method: 'PATCH' });
+        await fetch(`${API_URL}/api/appointments/${id}/cancel`, {
+          method: 'PATCH',
+        });
       } catch (err) {
         console.error('Cancel error:', err);
       }
     }
-    setMyAppointments(prev =>
-      prev.map(a => a.id === id ? { ...a, status: 'cancelled' } : a)
+    setMyAppointments((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, status: 'cancelled' } : a))
     );
   };
 
-  if (loading) return <p className="text-muted-foreground">Loading appointments...</p>;
+  if (loading)
+    return <p className="text-muted-foreground">Loading appointments...</p>;
 
   return (
     <div className="patient-appointments-container">
@@ -146,18 +172,25 @@ export default function PatientAppointments() {
       {/* Booking Form */}
       {showForm && (
         <div className="patient-appointments-form-card">
-          <h2 className="patient-appointments-form-title">Book New Appointment</h2>
-          <form onSubmit={handleBook} className="patient-appointments-form-grid">
+          <h2 className="patient-appointments-form-title">
+            Book New Appointment
+          </h2>
+          <form
+            onSubmit={handleBook}
+            className="patient-appointments-form-grid"
+          >
             <div className="patient-appointments-form-group">
               <label className="patient-appointments-label">Doctor</label>
               <select
                 value={doctor}
-                onChange={e => setDoctor(e.target.value)}
+                onChange={(e) => setDoctor(e.target.value)}
                 className="patient-appointments-select"
               >
                 <option value="">Select a doctor</option>
-                {doctors.map(d => (
-                  <option key={d.id} value={d.id}>{d.name}</option>
+                {doctors.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -166,7 +199,7 @@ export default function PatientAppointments() {
               <input
                 type="date"
                 value={date}
-                onChange={e => setDate(e.target.value)}
+                onChange={(e) => setDate(e.target.value)}
                 className="patient-appointments-input"
               />
             </div>
@@ -175,7 +208,7 @@ export default function PatientAppointments() {
               <input
                 type="time"
                 value={time}
-                onChange={e => setTime(e.target.value)}
+                onChange={(e) => setTime(e.target.value)}
                 className="patient-appointments-input"
               />
             </div>
@@ -183,13 +216,16 @@ export default function PatientAppointments() {
               <label className="patient-appointments-label">Reason</label>
               <input
                 value={reason}
-                onChange={e => setReason(e.target.value)}
+                onChange={(e) => setReason(e.target.value)}
                 placeholder="Reason for visit"
                 className="patient-appointments-input"
               />
             </div>
             <div className="patient-appointments-form-group full-width">
-              <button type="submit" className="patient-appointments-confirm-btn">
+              <button
+                type="submit"
+                className="patient-appointments-confirm-btn"
+              >
                 Confirm Booking
               </button>
             </div>
@@ -212,14 +248,16 @@ export default function PatientAppointments() {
               </tr>
             </thead>
             <tbody>
-              {myAppointments.map(apt => (
+              {myAppointments.map((apt) => (
                 <tr key={apt.id}>
                   <td>{apt.doctorName}</td>
                   <td>{apt.date}</td>
                   <td>{apt.time}</td>
                   <td>{apt.reason}</td>
                   <td>
-                    <span className={`patient-appointments-status-badge ${apt.status}`}>
+                    <span
+                      className={`patient-appointments-status-badge ${apt.status}`}
+                    >
                       {apt.status}
                     </span>
                   </td>
@@ -238,7 +276,9 @@ export default function PatientAppointments() {
             </tbody>
           </table>
           {myAppointments.length === 0 && (
-            <p className="patient-appointments-empty-state">No appointments found</p>
+            <p className="patient-appointments-empty-state">
+              No appointments found
+            </p>
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
- /* HealthSphere Professional Login Page Styling */
+/* HealthSphere Professional Login Page Styling */
 
 /* Background with image and professional overlay */
 .login-container {
@@ -15,7 +15,7 @@
   left: -5%;
   width: 110%;
   height: 110%;
-  background: url("../image/imageBackground.jpg");
+  background: url('../image/imageBackground.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -32,9 +32,9 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    135deg, 
-    rgba(10, 25, 47, 0.85) 0%, 
-    rgba(17, 34, 64, 0.7) 50%, 
+    135deg,
+    rgba(10, 25, 47, 0.85) 0%,
+    rgba(17, 34, 64, 0.7) 50%,
     rgba(35, 53, 84, 0.85) 100%
   );
   z-index: 1;
@@ -42,8 +42,12 @@
 
 /* Keyframes for the background image animation */
 @keyframes slowZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
 }
 
 /* Main login wrapper */
@@ -163,8 +167,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Form groups spacing */
@@ -173,8 +181,12 @@
   animation: fadeIn 0.8s ease backwards;
 }
 
-.login-form-group:nth-child(2) { animation-delay: 0.5s; }
-.login-form-group:nth-child(3) { animation-delay: 0.6s; }
+.login-form-group:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.login-form-group:nth-child(3) {
+  animation-delay: 0.6s;
+}
 
 /* Form labels */
 .login-label {
@@ -228,9 +240,11 @@
 }
 
 .login-input:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 0 0 4px rgba(76, 175, 80, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .login-input::placeholder {
@@ -240,7 +254,7 @@
 }
 
 .login-input-wrapper:has(.login-input:focus) svg {
-  color: #4CAF50;
+  color: #4caf50;
   transform: scale(1.1);
 }
 
@@ -273,9 +287,11 @@
 }
 
 .login-select:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 0 0 4px rgba(76, 175, 80, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 /* Error message styling */
@@ -315,7 +331,7 @@
 .login-button {
   width: 100%;
   padding: 0.875rem 1.5rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -345,7 +361,9 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .login-button:hover:not(:disabled)::before {
@@ -375,8 +393,12 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Footer */
@@ -392,7 +414,7 @@
 }
 
 .login-link {
-  color: #4CAF50;
+  color: #4caf50;
   text-decoration: none;
   font-weight: 700;
   margin-left: 0.25rem;
@@ -401,7 +423,7 @@
 
 .login-link:hover {
   text-decoration: underline;
-  color: #81C784;
+  color: #81c784;
 }
 
 /* Demo credentials card */
@@ -447,7 +469,11 @@
 }
 
 .demo-button:hover {
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(33, 150, 243, 0.08) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.08) 0%,
+    rgba(33, 150, 243, 0.08) 100%
+  );
   border-color: #e0e0e0;
   transform: translateX(4px);
 }
@@ -496,7 +522,7 @@
 .login-button:focus-visible,
 .login-input:focus-visible,
 .demo-button:focus-visible {
-  outline: 2px solid #4CAF50;
+  outline: 2px solid #4caf50;
   outline-offset: 2px;
 }
 

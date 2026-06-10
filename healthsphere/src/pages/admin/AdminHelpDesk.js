@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useData } from '../../context/DataContext';
-import { 
-  MessageSquare, Calendar, CheckCircle, 
-  Send, Key, Search, Filter, MessageCircle, 
-  ChevronRight
+import {
+  MessageSquare,
+  Calendar,
+  CheckCircle,
+  Send,
+  Key,
+  Search,
+  Filter,
+  MessageCircle,
+  ChevronRight,
 } from 'lucide-react';
 import './AdminHelpDesk.css';
 
@@ -38,7 +44,7 @@ export default function AdminHelpDesk() {
       requestId: selectedRequest.id,
       adminResponse,
       resetPassword,
-      newPassword: resetPassword ? newPassword : null
+      newPassword: resetPassword ? newPassword : null,
     });
 
     if (result.success) {
@@ -54,10 +60,12 @@ export default function AdminHelpDesk() {
     setLoading(false);
   };
 
-  const filteredRequests = requests.filter(req => {
+  const filteredRequests = requests.filter((req) => {
     const matchesFilter = filter === 'all' || req.status === filter;
-    const matchesSearch = req.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         (req.full_name && req.full_name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesSearch =
+      req.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (req.full_name &&
+        req.full_name.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesFilter && matchesSearch;
   });
 
@@ -71,9 +79,9 @@ export default function AdminHelpDesk() {
         <div className="header-actions">
           <div className="search-bar">
             <Search size={18} />
-            <input 
-              type="text" 
-              placeholder="Search by name or email..." 
+            <input
+              type="text"
+              placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -97,16 +105,20 @@ export default function AdminHelpDesk() {
           ) : filteredRequests.length === 0 ? (
             <div className="empty-state">No requests found.</div>
           ) : (
-            filteredRequests.map(req => (
-              <div 
-                key={req.id} 
+            filteredRequests.map((req) => (
+              <div
+                key={req.id}
                 className={`request-card ${selectedRequest?.id === req.id ? 'active' : ''} ${req.status}`}
                 onClick={() => setSelectedRequest(req)}
               >
                 <div className="request-card-info">
                   <div className="card-top">
-                    <span className="user-name">{req.full_name || 'Guest User'}</span>
-                    <span className={`status-pill ${req.status}`}>{req.status}</span>
+                    <span className="user-name">
+                      {req.full_name || 'Guest User'}
+                    </span>
+                    <span className={`status-pill ${req.status}`}>
+                      {req.status}
+                    </span>
                   </div>
                   <div className="card-email">{req.email}</div>
                   <div className="card-subject">{req.subject}</div>
@@ -124,7 +136,8 @@ export default function AdminHelpDesk() {
               <div className="detail-header">
                 <div className="user-profile">
                   <div className="user-avatar">
-                    {(selectedRequest.full_name || selectedRequest.email)[0].toUpperCase()}
+                    {(selectedRequest.full_name ||
+                      selectedRequest.email)[0].toUpperCase()}
                   </div>
                   <div className="user-details">
                     <h3>{selectedRequest.full_name || 'Guest User'}</h3>
@@ -134,7 +147,9 @@ export default function AdminHelpDesk() {
                 <div className="request-meta">
                   <div className="meta-item">
                     <Calendar size={14} />
-                    <span>{new Date(selectedRequest.created_at).toLocaleString()}</span>
+                    <span>
+                      {new Date(selectedRequest.created_at).toLocaleString()}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -164,8 +179,8 @@ export default function AdminHelpDesk() {
                     <MessageCircle size={18} />
                     Respond to Patient
                   </div>
-                  
-                  <textarea 
+
+                  <textarea
                     placeholder="Type your message here... (e.g., Your password has been reset to [NewPassword])"
                     value={adminResponse}
                     onChange={(e) => setAdminResponse(e.target.value)}
@@ -174,10 +189,10 @@ export default function AdminHelpDesk() {
 
                   <div className="password-reset-section">
                     <label className="checkbox-label">
-                      <input 
-                        type="checkbox" 
-                        checked={resetPassword} 
-                        onChange={(e) => setResetPassword(e.target.checked)} 
+                      <input
+                        type="checkbox"
+                        checked={resetPassword}
+                        onChange={(e) => setResetPassword(e.target.checked)}
                       />
                       <span>Perform secure password reset for this user</span>
                     </label>
@@ -186,15 +201,17 @@ export default function AdminHelpDesk() {
                       <div className="password-input-group">
                         <div className="input-with-icon">
                           <Key size={16} />
-                          <input 
-                            type="text" 
-                            placeholder="Enter new temporary password" 
+                          <input
+                            type="text"
+                            placeholder="Enter new temporary password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             required={resetPassword}
                           />
                         </div>
-                        <p className="hint">This will permanently update their login credentials.</p>
+                        <p className="hint">
+                          This will permanently update their login credentials.
+                        </p>
                       </div>
                     )}
                   </div>
@@ -211,7 +228,10 @@ export default function AdminHelpDesk() {
               <div className="no-selection-content">
                 <MessageSquare size={64} />
                 <h3>Select a request to start</h3>
-                <p>Choose a help desk ticket from the sidebar to view details and respond.</p>
+                <p>
+                  Choose a help desk ticket from the sidebar to view details and
+                  respond.
+                </p>
               </div>
             </div>
           )}

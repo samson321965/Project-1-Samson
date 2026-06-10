@@ -1,9 +1,24 @@
 import React from 'react';
 import { useData } from '../../context/DataContext';
-import { Users, UserCheck, Calendar, ShieldAlert, TrendingUp } from 'lucide-react';
 import {
-  BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis,
-  CartesianGrid, Tooltip, ResponsiveContainer, Legend
+  Users,
+  UserCheck,
+  Calendar,
+  ShieldAlert,
+  TrendingUp,
+} from 'lucide-react';
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
 } from 'recharts';
 import './AdminOverview.css';
 
@@ -12,18 +27,24 @@ const COLORS = ['#4338ca', '#0d9488', '#f59e0b', '#dc2626'];
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div style={{
-        background: '#fff',
-        border: '1px solid #e2e8f0',
-        borderRadius: '0.75rem',
-        padding: '0.75rem 1rem',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-        fontSize: '0.85rem',
-        fontWeight: 600,
-        color: '#0f172a'
-      }}>
-        <p style={{ margin: 0, color: '#64748b', fontSize: '0.75rem' }}>{label}</p>
-        <p style={{ margin: '0.25rem 0 0', color: '#4338ca', fontSize: '1rem' }}>
+      <div
+        style={{
+          background: '#fff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '0.75rem',
+          padding: '0.75rem 1rem',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+          fontSize: '0.85rem',
+          fontWeight: 600,
+          color: '#0f172a',
+        }}
+      >
+        <p style={{ margin: 0, color: '#64748b', fontSize: '0.75rem' }}>
+          {label}
+        </p>
+        <p
+          style={{ margin: '0.25rem 0 0', color: '#4338ca', fontSize: '1rem' }}
+        >
           {payload[0].value}
         </p>
       </div>
@@ -36,20 +57,28 @@ export default function AdminOverview() {
   const { patients, staff, appointments, emergencyMode } = useData();
 
   const statusData = [
-    { name: 'Scheduled', value: appointments.filter(a => a.status === 'scheduled').length },
-    { name: 'Completed', value: appointments.filter(a => a.status === 'completed').length },
-    { name: 'Cancelled', value: appointments.filter(a => a.status === 'cancelled').length },
+    {
+      name: 'Scheduled',
+      value: appointments.filter((a) => a.status === 'scheduled').length,
+    },
+    {
+      name: 'Completed',
+      value: appointments.filter((a) => a.status === 'completed').length,
+    },
+    {
+      name: 'Cancelled',
+      value: appointments.filter((a) => a.status === 'cancelled').length,
+    },
   ];
 
   const roleData = [
-    { name: 'Doctors', value: staff.filter(s => s.role === 'doctor').length },
-    { name: 'Nurses',  value: staff.filter(s => s.role === 'nurse').length },
-    { name: 'Admins',  value: staff.filter(s => s.role === 'admin').length },
+    { name: 'Doctors', value: staff.filter((s) => s.role === 'doctor').length },
+    { name: 'Nurses', value: staff.filter((s) => s.role === 'nurse').length },
+    { name: 'Admins', value: staff.filter((s) => s.role === 'admin').length },
   ];
 
   return (
     <div className="admin-overview-container">
-
       {/* ── Hero Banner ─────────────────────────────────── */}
       <div className="aov-hero">
         <div className="aov-hero-circles" />
@@ -59,7 +88,9 @@ export default function AdminOverview() {
         </div>
         <div className="aov-hero-right">
           <div className="aov-system-status">
-            <span className={`aov-status-dot ${emergencyMode ? 'emergency' : 'online'}`} />
+            <span
+              className={`aov-status-dot ${emergencyMode ? 'emergency' : 'online'}`}
+            />
             {emergencyMode ? 'Emergency Active' : 'Systems Online'}
           </div>
         </div>
@@ -74,7 +105,6 @@ export default function AdminOverview() {
 
       {/* ── Top Stats Row ───────────────────────────────── */}
       <div className="admin-overview-stats-grid">
-
         <div className="admin-overview-stat-card patients">
           <div className="aov-card-row">
             <div>
@@ -124,7 +154,9 @@ export default function AdminOverview() {
           <div className="aov-card-row">
             <div>
               <p className="admin-overview-stat-label">Emergency</p>
-              <p className="admin-overview-stat-value">{emergencyMode ? 'ON' : 'OFF'}</p>
+              <p className="admin-overview-stat-value">
+                {emergencyMode ? 'ON' : 'OFF'}
+              </p>
               <p className="admin-overview-stat-change">
                 {emergencyMode ? '⚠ Active mode' : '✓ Normal mode'}
               </p>
@@ -134,12 +166,10 @@ export default function AdminOverview() {
             </div>
           </div>
         </div>
-
       </div>
 
       {/* ── Charts Section ──────────────────────────────── */}
       <div className="admin-overview-content-grid">
-
         {/* Bar Chart */}
         <div className="admin-overview-section">
           <h2>Appointments by Status</h2>
@@ -217,7 +247,13 @@ export default function AdminOverview() {
                   iconType="circle"
                   iconSize={8}
                   formatter={(value) => (
-                    <span style={{ color: '#475569', fontSize: '0.82rem', fontWeight: 600 }}>
+                    <span
+                      style={{
+                        color: '#475569',
+                        fontSize: '0.82rem',
+                        fontWeight: 600,
+                      }}
+                    >
                       {value}
                     </span>
                   )}
@@ -226,7 +262,6 @@ export default function AdminOverview() {
             </ResponsiveContainer>
           </div>
         </div>
-
       </div>
     </div>
   );

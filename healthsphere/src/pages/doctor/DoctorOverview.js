@@ -1,6 +1,12 @@
 import React from 'react';
 import { useData } from '../../context/DataContext';
-import { Calendar, Users, AlertTriangle, Clock, Stethoscope } from 'lucide-react';
+import {
+  Calendar,
+  Users,
+  AlertTriangle,
+  Clock,
+  Stethoscope,
+} from 'lucide-react';
 import './DoctorOverview.css';
 
 export default function DoctorOverview() {
@@ -9,19 +15,25 @@ export default function DoctorOverview() {
   const today = new Date().toISOString().split('T')[0];
 
   const todayApts = appointments.filter(
-    (a) => (currentUser?.role === 'nurse' || a.doctorId === currentUser?.id) && a.date === today
+    (a) =>
+      (currentUser?.role === 'nurse' || a.doctorId === currentUser?.id) &&
+      a.date === today
   );
 
   const myPatientIds = [
     ...new Set(
       appointments
-        .filter((a) => currentUser?.role === 'nurse' || a.doctorId === currentUser?.id)
+        .filter(
+          (a) => currentUser?.role === 'nurse' || a.doctorId === currentUser?.id
+        )
         .map((a) => a.patientId)
     ),
   ];
 
   const scheduledCount = appointments.filter(
-    (a) => (currentUser?.role === 'nurse' || a.doctorId === currentUser?.id) && a.status === 'scheduled'
+    (a) =>
+      (currentUser?.role === 'nurse' || a.doctorId === currentUser?.id) &&
+      a.status === 'scheduled'
   ).length;
 
   // Time-based greeting
@@ -33,16 +45,13 @@ export default function DoctorOverview() {
 
   return (
     <div className="doctor-overview-container">
-
       {/* ── Hero Banner ────────────────────────────────── */}
       <div className="dov-hero">
         <div className="dov-hero-content">
           <h1>
             {greeting}, {currentUser?.name?.split(' ')[0]} 👋
           </h1>
-          <p>
-            {roleLabel} Dashboard &nbsp;·&nbsp; Here's your daily overview
-          </p>
+          <p>{roleLabel} Dashboard &nbsp;·&nbsp; Here's your daily overview</p>
         </div>
 
         <div className="dov-hero-stats">
@@ -66,7 +75,6 @@ export default function DoctorOverview() {
 
       {/* ── Stats Grid ─────────────────────────────────── */}
       <div className="doctor-overview-stats-grid">
-
         <div className="doctor-overview-stat-card primary">
           <div className="doctor-overview-stat-icon">
             <Calendar size={22} />
@@ -102,29 +110,43 @@ export default function DoctorOverview() {
             <AlertTriangle size={22} />
           </div>
           <div>
-            <p className="doctor-overview-stat-value">{emergencyMode ? 'ON' : 'OFF'}</p>
+            <p className="doctor-overview-stat-value">
+              {emergencyMode ? 'ON' : 'OFF'}
+            </p>
             <p className="doctor-overview-stat-label">Emergency Mode</p>
           </div>
         </div>
-
       </div>
 
       {/* ── Today's Schedule ───────────────────────────── */}
       <div className="doctor-overview-schedule-section">
-        <h2><Stethoscope size={16} />Today's Schedule</h2>
+        <h2>
+          <Stethoscope size={16} />
+          Today's Schedule
+        </h2>
 
         {todayApts.length === 0 ? (
-          <p className="doctor-overview-no-appointments">No appointments scheduled for today</p>
+          <p className="doctor-overview-no-appointments">
+            No appointments scheduled for today
+          </p>
         ) : (
           <div className="doctor-overview-appointments-list">
             {todayApts.map((apt) => (
               <div key={apt.id} className="doctor-overview-appointment-item">
-                <div className="doctor-overview-appointment-time">{apt.time}</div>
-                <div className="doctor-overview-appointment-info">
-                  <p className="doctor-overview-appointment-title">{apt.patientName}</p>
-                  <p className="doctor-overview-appointment-reason">{apt.reason}</p>
+                <div className="doctor-overview-appointment-time">
+                  {apt.time}
                 </div>
-                <span className={`doctor-overview-appointment-badge ${apt.status}`}>
+                <div className="doctor-overview-appointment-info">
+                  <p className="doctor-overview-appointment-title">
+                    {apt.patientName}
+                  </p>
+                  <p className="doctor-overview-appointment-reason">
+                    {apt.reason}
+                  </p>
+                </div>
+                <span
+                  className={`doctor-overview-appointment-badge ${apt.status}`}
+                >
                   {apt.status}
                 </span>
               </div>
@@ -132,7 +154,6 @@ export default function DoctorOverview() {
           </div>
         )}
       </div>
-
     </div>
   );
 }

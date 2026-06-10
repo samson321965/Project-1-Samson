@@ -9,9 +9,13 @@ export default function DoctorSchedule() {
 
   // Filtering and sorting logic
   const myApts = appointments
-    .filter(a => currentUser?.role === 'nurse' || a.doctorId === currentUser?.id)
-    .filter(a => !dateFilter || a.date === dateFilter)
-    .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    .filter(
+      (a) => currentUser?.role === 'nurse' || a.doctorId === currentUser?.id
+    )
+    .filter((a) => !dateFilter || a.date === dateFilter)
+    .sort(
+      (a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time)
+    );
 
   return (
     <div className="doctor-schedule-container">
@@ -23,15 +27,15 @@ export default function DoctorSchedule() {
       {/* Filter Section */}
       <div className="doctor-schedule-filter-card">
         <Filter size={18} className="doctor-schedule-filter-icon" />
-        <input 
-          type="date" 
-          value={dateFilter} 
-          onChange={e => setDateFilter(e.target.value)}
-          className="doctor-schedule-date-input" 
+        <input
+          type="date"
+          value={dateFilter}
+          onChange={(e) => setDateFilter(e.target.value)}
+          className="doctor-schedule-date-input"
         />
         {dateFilter && (
-          <button 
-            onClick={() => setDateFilter('')} 
+          <button
+            onClick={() => setDateFilter('')}
             className="doctor-schedule-clear-btn"
           >
             Clear
@@ -53,14 +57,16 @@ export default function DoctorSchedule() {
               </tr>
             </thead>
             <tbody>
-              {myApts.map(apt => (
+              {myApts.map((apt) => (
                 <tr key={apt.id}>
                   <td>{apt.date}</td>
                   <td>{apt.time}</td>
                   <td>{apt.patientName}</td>
                   <td>{apt.reason}</td>
                   <td>
-                    <span className={`doctor-schedule-status-badge ${apt.status}`}>
+                    <span
+                      className={`doctor-schedule-status-badge ${apt.status}`}
+                    >
                       {apt.status}
                     </span>
                   </td>
@@ -68,11 +74,9 @@ export default function DoctorSchedule() {
               ))}
             </tbody>
           </table>
-          
+
           {myApts.length === 0 && (
-            <p className="doctor-schedule-empty">
-              No appointments found
-            </p>
+            <p className="doctor-schedule-empty">No appointments found</p>
           )}
         </div>
       </div>

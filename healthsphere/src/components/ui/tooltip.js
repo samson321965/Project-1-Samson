@@ -8,9 +8,7 @@ const TooltipContext = createContext();
 
 export function TooltipProvider({ children }) {
   return (
-    <TooltipContext.Provider value={{}}>
-      {children}
-    </TooltipContext.Provider>
+    <TooltipContext.Provider value={{}}>{children}</TooltipContext.Provider>
   );
 }
 

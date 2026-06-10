@@ -4,7 +4,9 @@ exports.getPatientRecords = async (req, res) => {
   const patientId = req.params.id;
 
   if (isNaN(patientId)) {
-    return res.status(400).json({ message: "Invalid patient ID. ID must be a number." });
+    return res
+      .status(400)
+      .json({ message: 'Invalid patient ID. ID must be a number.' });
   }
 
   try {
@@ -16,7 +18,7 @@ exports.getPatientRecords = async (req, res) => {
       WHERE p.user_id = $1
     `;
     const patientResult = await db.query(patientQuery, [patientId]);
-    
+
     if (patientResult.rows.length === 0) {
       return res.status(404).json({ message: 'Patient not found' });
     }
@@ -24,43 +26,55 @@ exports.getPatientRecords = async (req, res) => {
     const patientData = patientResult.rows[0];
 
     // 2. Fetch medical history
-    const historyResult = await db.query('SELECT * FROM medical_history WHERE patient_id = $1', [patientId]);
-    
+    const historyResult = await db.query(
+      'SELECT * FROM medical_history WHERE patient_id = $1',
+      [patientId]
+    );
+
     // 3. Fetch allergies
-    const allergiesResult = await db.query('SELECT * FROM allergies WHERE patient_id = $1', [patientId]);
+    const allergiesResult = await db.query(
+      'SELECT * FROM allergies WHERE patient_id = $1',
+      [patientId]
+    );
 
     // 4. Fetch prescriptions
-    const prescriptionsResult = await db.query(`
+    const prescriptionsResult = await db.query(
+      `
       SELECT pr.*, u.full_name as prescribed_by 
       FROM prescriptions pr
       LEFT JOIN users u ON pr.doctor_id = u.id
       WHERE pr.patient_id = $1
-    `, [patientId]);
+    `,
+      [patientId]
+    );
 
     // 5. Fetch doctor notes
-    const notesResult = await db.query(`
+    const notesResult = await db.query(
+      `
       SELECT dn.*, u.full_name as written_by 
       FROM doctor_notes dn
       LEFT JOIN users u ON dn.doctor_id = u.id
       WHERE dn.patient_id = $1
       ORDER BY dn.created_at DESC
-    `, [patientId]);
+    `,
+      [patientId]
+    );
 
     // Combine all data into the format expected by the frontend
     const fullRecord = {
       ...patientData,
-      medicalHistory: historyResult.rows.map(row => row.condition), // or map full object depending on UI needs
-      allergies: allergiesResult.rows.map(row => row.allergy_name),
-      prescriptions: prescriptionsResult.rows.map(row => ({
+      medicalHistory: historyResult.rows.map((row) => row.condition), // or map full object depending on UI needs
+      allergies: allergiesResult.rows.map((row) => row.allergy_name),
+      prescriptions: prescriptionsResult.rows.map((row) => ({
         id: row.id,
         medication: row.medication,
         dosage: row.dosage,
         frequency: row.frequency,
         startDate: row.start_date,
         endDate: row.end_date,
-        prescribedBy: row.prescribed_by || 'Unknown'
+        prescribedBy: row.prescribed_by || 'Unknown',
       })),
-      doctorNotes: notesResult.rows.map(row => row.note_text)
+      doctorNotes: notesResult.rows.map((row) => row.note_text),
     };
 
     res.json(fullRecord);
@@ -72,10 +86,11 @@ exports.getPatientRecords = async (req, res) => {
 
 exports.addPrescription = async (req, res) => {
   const patientId = req.params.id;
-  const { doctorId, medication, dosage, frequency, startDate, endDate } = req.body;
+  const { doctorId, medication, dosage, frequency, startDate, endDate } =
+    req.body;
 
   if (isNaN(patientId)) {
-    return res.status(400).json({ message: "Invalid patient ID." });
+    return res.status(400).json({ message: 'Invalid patient ID.' });
   }
 
   try {
@@ -84,12 +99,20 @@ exports.addPrescription = async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;
     `;
-    const values = [patientId, doctorId, medication, dosage, frequency, startDate, endDate];
+    const values = [
+      patientId,
+      doctorId,
+      medication,
+      dosage,
+      frequency,
+      startDate,
+      endDate,
+    ];
     const result = await db.query(query, values);
 
     res.status(201).json({
       message: 'Prescription added successfully',
-      prescription: result.rows[0]
+      prescription: result.rows[0],
     });
   } catch (error) {
     console.error('Error adding prescription:', error);
@@ -102,7 +125,7 @@ exports.addNote = async (req, res) => {
   const { doctorId, noteText } = req.body;
 
   if (isNaN(patientId)) {
-    return res.status(400).json({ message: "Invalid patient ID." });
+    return res.status(400).json({ message: 'Invalid patient ID.' });
   }
 
   try {
@@ -116,7 +139,7 @@ exports.addNote = async (req, res) => {
 
     res.status(201).json({
       message: 'Note added successfully',
-      note: result.rows[0]
+      note: result.rows[0],
     });
   } catch (error) {
     console.error('Error adding note:', error);

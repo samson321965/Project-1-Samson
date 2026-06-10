@@ -67,7 +67,7 @@
 .admin-patients-title-group h1 {
   font-size: 1.875rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -85,7 +85,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -111,7 +111,9 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .admin-patients-add-btn:hover {
@@ -152,7 +154,7 @@
   justify-content: space-between;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #4CAF50;
+  border-bottom: 2px solid #4caf50;
 }
 
 .admin-patients-form-title {
@@ -196,17 +198,35 @@
   animation: fadeIn 0.6s ease backwards;
 }
 
-.admin-patients-form-group:nth-child(1) { animation-delay: 0.2s; }
-.admin-patients-form-group:nth-child(2) { animation-delay: 0.25s; }
-.admin-patients-form-group:nth-child(3) { animation-delay: 0.3s; }
-.admin-patients-form-group:nth-child(4) { animation-delay: 0.35s; }
-.admin-patients-form-group:nth-child(5) { animation-delay: 0.4s; }
-.admin-patients-form-group:nth-child(6) { animation-delay: 0.45s; }
-.admin-patients-form-group:nth-child(7) { animation-delay: 0.5s; }
+.admin-patients-form-group:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.admin-patients-form-group:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.admin-patients-form-group:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.admin-patients-form-group:nth-child(4) {
+  animation-delay: 0.35s;
+}
+.admin-patients-form-group:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.admin-patients-form-group:nth-child(6) {
+  animation-delay: 0.45s;
+}
+.admin-patients-form-group:nth-child(7) {
+  animation-delay: 0.5s;
+}
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .admin-patients-label {
@@ -242,7 +262,7 @@
 
 .admin-patients-input:focus,
 .admin-patients-select:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   background: white;
   box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
 }
@@ -278,7 +298,7 @@
 .admin-patients-save-btn {
   width: 100%;
   padding: 0.875rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   color: white;
   border: none;
   border-radius: 0.875rem;
@@ -303,7 +323,9 @@
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .admin-patients-save-btn:hover::before {
@@ -342,7 +364,7 @@
 }
 
 .admin-patients-search-input:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
   box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
 }
 
@@ -425,7 +447,7 @@
 
 .admin-patients-action-btn.edit {
   background: rgba(76, 175, 80, 0.1);
-  color: #4CAF50;
+  color: #4caf50;
 }
 
 .admin-patients-action-btn.edit:hover {
@@ -468,7 +490,6 @@
   animation: fadeIn 0.3s ease;
   padding: 1rem;
 }
-
 
 /* Empty State */
 .admin-patients-empty {

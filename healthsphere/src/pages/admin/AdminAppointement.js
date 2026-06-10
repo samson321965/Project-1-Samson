@@ -13,10 +13,12 @@ export default function AdminAppointments() {
       const res = await fetch(`${API_URL}/api/appointments/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        setAppointments(prev => prev.map(a => a.id === id ? { ...a, status } : a));
+        setAppointments((prev) =>
+          prev.map((a) => (a.id === id ? { ...a, status } : a))
+        );
       } else {
         console.error('Failed to update status on server');
       }
@@ -46,7 +48,7 @@ export default function AdminAppointments() {
               </tr>
             </thead>
             <tbody>
-              {appointments.map(apt => (
+              {appointments.map((apt) => (
                 <tr key={apt.id}>
                   <td>{apt.patientName}</td>
                   <td>{apt.doctorName}</td>
@@ -60,16 +62,16 @@ export default function AdminAppointments() {
                   <td>
                     <div className="admin-apt-actions">
                       {apt.status !== 'completed' && (
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'completed')} 
+                        <button
+                          onClick={() => updateStatus(apt.id, 'completed')}
                           className="admin-apt-action-btn success"
                         >
                           <Check size={14} />
                         </button>
                       )}
                       {apt.status !== 'cancelled' && (
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'cancelled')} 
+                        <button
+                          onClick={() => updateStatus(apt.id, 'cancelled')}
                           className="admin-apt-action-btn danger"
                         >
                           <X size={14} />

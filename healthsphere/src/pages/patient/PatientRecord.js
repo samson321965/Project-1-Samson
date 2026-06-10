@@ -14,8 +14,13 @@ export default function PatientRecords() {
     const fetchPatientData = async () => {
       try {
         // Fallback to ID 5 (John Doe from our seed data) if currentUser.id isn't in DB yet
-        const patientId = currentUser?.role === 'patient' && !isNaN(currentUser?.id) ? currentUser.id : 5;
-        const response = await fetch(`${API_URL}/api/patients/${patientId}/records`);
+        const patientId =
+          currentUser?.role === 'patient' && !isNaN(currentUser?.id)
+            ? currentUser.id
+            : 5;
+        const response = await fetch(
+          `${API_URL}/api/patients/${patientId}/records`
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch patient records from backend');
         }
@@ -27,13 +32,17 @@ export default function PatientRecords() {
         setLoading(false);
       }
     };
-    
+
     fetchPatientData();
   }, [currentUser]);
 
-  if (loading) return <p className="text-muted-foreground">Loading records from database...</p>;
+  if (loading)
+    return (
+      <p className="text-muted-foreground">Loading records from database...</p>
+    );
   if (error) return <p className="text-danger">{error}</p>;
-  if (!patient) return <p className="text-muted-foreground">No records found</p>;
+  if (!patient)
+    return <p className="text-muted-foreground">No records found</p>;
 
   return (
     <div className="patient-records-container">
@@ -53,7 +62,9 @@ export default function PatientRecords() {
           ) : (
             <div className="history-list">
               {patient.medicalHistory.map((item, i) => (
-                <div key={i} className="history-item">{item}</div>
+                <div key={i} className="history-item">
+                  {item}
+                </div>
               ))}
             </div>
           )}
@@ -69,7 +80,9 @@ export default function PatientRecords() {
           ) : (
             <div className="allergies-container">
               {patient.allergies.map((a, i) => (
-                <span key={i} className="allergy-badge">{a}</span>
+                <span key={i} className="allergy-badge">
+                  {a}
+                </span>
               ))}
             </div>
           )}
@@ -85,7 +98,9 @@ export default function PatientRecords() {
           ) : (
             <div className="notes-list">
               {patient.doctorNotes.map((note, i) => (
-                <div key={i} className="note-item">{note}</div>
+                <div key={i} className="note-item">
+                  {note}
+                </div>
               ))}
             </div>
           )}
@@ -100,13 +115,15 @@ export default function PatientRecords() {
             <p className="records-empty-state">No active prescriptions</p>
           ) : (
             <div className="prescriptions-list">
-              {patient.prescriptions.map(rx => (
+              {patient.prescriptions.map((rx) => (
                 <div key={rx.id} className="prescription-item">
                   <div className="prescription-medication">{rx.medication}</div>
                   <div className="prescription-dosage">{rx.dosage}</div>
                   <div className="prescription-frequency">
                     <span>{rx.frequency}</span>
-                    <span>{rx.startDate} to {rx.endDate}</span>
+                    <span>
+                      {rx.startDate} to {rx.endDate}
+                    </span>
                   </div>
                   <div className="prescription-meta">By {rx.prescribedBy}</div>
                 </div>

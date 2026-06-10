@@ -45,11 +45,11 @@
     position: fixed;
     transform: translateX(0);
   }
-  
+
   .dashboard-sidebar:not(.open) {
     transform: translateX(-100%);
   }
-  
+
   /* Show overlay on desktop when sidebar is open */
   .sidebar-overlay {
     display: block !important;
@@ -95,7 +95,8 @@
 }
 
 /* Open button (hamburger) - hide when sidebar is open on mobile */
-.dashboard-main-wrapper[data-sidebar-open="true"] .sidebar-toggle-btn:not(.sidebar-close-btn) {
+.dashboard-main-wrapper[data-sidebar-open='true']
+  .sidebar-toggle-btn:not(.sidebar-close-btn) {
   display: none;
 }
 
@@ -105,7 +106,7 @@
   margin-left: auto;
 }
 
-.dashboard-main-wrapper[data-sidebar-open="true"] .sidebar-close-btn {
+.dashboard-main-wrapper[data-sidebar-open='true'] .sidebar-close-btn {
   display: flex;
 }
 
@@ -114,7 +115,7 @@
   display: none;
 }
 
-.dashboard-main-wrapper[data-sidebar-open="true"] .sidebar-close-btn {
+.dashboard-main-wrapper[data-sidebar-open='true'] .sidebar-close-btn {
   display: flex;
 }
 
@@ -154,7 +155,11 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.75rem; /* modern squircle */
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.6) 100%
+  );
   color: hsl(var(--primary-foreground));
   display: flex;
   align-items: center;
@@ -276,7 +281,11 @@
 }
 
 .patient-stat-card {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.8) 100%
+  );
   color: hsl(var(--primary-foreground));
   border-radius: var(--radius);
   padding: 1.5rem;
@@ -293,15 +302,27 @@
 }
 
 .patient-stat-card.warning {
-  background: linear-gradient(135deg, hsl(var(--warning)) 0%, hsl(var(--warning) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--warning)) 0%,
+    hsl(var(--warning) / 0.8) 100%
+  );
 }
 
 .patient-stat-card.success {
-  background: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(var(--success) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--success)) 0%,
+    hsl(var(--success) / 0.8) 100%
+  );
 }
 
 .patient-stat-card.info {
-  background: linear-gradient(135deg, hsl(var(--accent-foreground)) 0%, hsl(var(--accent-foreground) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--accent-foreground)) 0%,
+    hsl(var(--accent-foreground) / 0.8) 100%
+  );
 }
 
 .patient-stat-icon {
@@ -435,7 +456,11 @@
 
 .doctor-emergency-banner {
   padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, hsl(var(--emergency)) 0%, hsl(var(--emergency) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--emergency)) 0%,
+    hsl(var(--emergency) / 0.8) 100%
+  );
   color: hsl(var(--emergency-foreground));
   border-radius: var(--radius);
   font-weight: 600;
@@ -452,7 +477,11 @@
 }
 
 .doctor-stat-card {
-  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--secondary)) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--secondary)) 100%
+  );
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius);
   padding: 1.5rem;
@@ -469,25 +498,41 @@
 }
 
 .doctor-stat-card.primary {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.8) 100%
+  );
   color: hsl(var(--primary-foreground));
   border: none;
 }
 
 .doctor-stat-card.success {
-  background: linear-gradient(135deg, hsl(var(--success)) 0%, hsl(var(--success) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--success)) 0%,
+    hsl(var(--success) / 0.8) 100%
+  );
   color: hsl(var(--success-foreground));
   border: none;
 }
 
 .doctor-stat-card.warning {
-  background: linear-gradient(135deg, hsl(var(--warning)) 0%, hsl(var(--warning) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--warning)) 0%,
+    hsl(var(--warning) / 0.8) 100%
+  );
   color: hsl(var(--warning-foreground));
   border: none;
 }
 
 .doctor-stat-card.destructive {
-  background: linear-gradient(135deg, hsl(var(--destructive)) 0%, hsl(var(--destructive) / 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--destructive)) 0%,
+    hsl(var(--destructive) / 0.8) 100%
+  );
   color: hsl(var(--destructive-foreground));
   border: none;
 }
@@ -544,7 +589,11 @@
   width: 2.75rem;
   height: 2.75rem;
   border-radius: calc(var(--radius) * 0.75);
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.6)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -617,7 +666,11 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.5));
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.5)
+  );
 }
 
 .admin-stat-card.patients::before {
@@ -811,7 +864,11 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.6)
+  );
   display: flex;
   align-items: center;
   justify-content: center;

@@ -6,11 +6,12 @@ import './DoctorAppointements.css';
 
 export default function DoctorAppointments() {
   const { currentUser, appointments, setAppointments } = useData();
-  
+
   // Filter appointments specifically for the logged-in doctor, or show all for nurses
-  const myApts = currentUser?.role === 'nurse' 
-    ? appointments 
-    : appointments.filter(a => a.doctorId === currentUser?.id);
+  const myApts =
+    currentUser?.role === 'nurse'
+      ? appointments
+      : appointments.filter((a) => a.doctorId === currentUser?.id);
 
   // Status update function (TypeScript type for 'id' and 'status' removed)
   const updateStatus = async (id, status) => {
@@ -18,11 +19,11 @@ export default function DoctorAppointments() {
       const res = await fetch(`${API_URL}/api/appointments/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        setAppointments(prev => 
-          prev.map(a => (a.id === id ? { ...a, status } : a))
+        setAppointments((prev) =>
+          prev.map((a) => (a.id === id ? { ...a, status } : a))
         );
       } else {
         console.error('Failed to update status on server');
@@ -36,7 +37,9 @@ export default function DoctorAppointments() {
     <div className="doctor-appointments-container">
       <div className="page-header">
         <h1 className="page-title">Appointment Management</h1>
-        <p className="page-subtitle">Approve, complete, or cancel appointments</p>
+        <p className="page-subtitle">
+          Approve, complete, or cancel appointments
+        </p>
       </div>
 
       <div className="doctor-appointments-card">
@@ -53,7 +56,7 @@ export default function DoctorAppointments() {
               </tr>
             </thead>
             <tbody>
-              {myApts.map(apt => (
+              {myApts.map((apt) => (
                 <tr key={apt.id}>
                   <td>{apt.patientName}</td>
                   <td>{apt.date}</td>
@@ -67,15 +70,15 @@ export default function DoctorAppointments() {
                   <td>
                     {apt.status === 'scheduled' && (
                       <div className="doctor-apt-actions">
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'completed')} 
+                        <button
+                          onClick={() => updateStatus(apt.id, 'completed')}
                           className="doctor-apt-action-btn success"
                           title="Complete Appointment"
                         >
                           <Check size={14} />
                         </button>
-                        <button 
-                          onClick={() => updateStatus(apt.id, 'cancelled')} 
+                        <button
+                          onClick={() => updateStatus(apt.id, 'cancelled')}
                           className="doctor-apt-action-btn danger"
                           title="Cancel Appointment"
                         >
