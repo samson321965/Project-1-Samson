@@ -1,0 +1,174 @@
+
+# =============================================================
+# HealthSphere CI/CD Pipeline
+# Runs on: push to main (full pipeline) | PRs to main (CI only)
+# =============================================================
+
+name: HealthSphere CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # ─────────────────────────────────────────────
+  # JOB 1: Lint & Format Check
+  # ─────────────────────────────────────────────
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install root dev dependencies (prettier, concurrently)
+      - name: Install root dependencies
+        run: npm install
+
+      # Install backend dependencies
+      - name: Install backend dependencies
+        run: cd backend && npm install
+
+      # Install frontend dependencies
+      - name: Install frontend dependencies
+        run: cd healthsphere && npm install
+
+      # Run Prettier check — fails if any file is not formatted
+      - name: Check code formatting (Prettier)
+        run: npx prettier --check "backend/**/*.js" "healthsphere/src/**/*.{js,jsx,css}"
+
+  # ─────────────────────────────────────────────
+  # JOB 2: Build
+  # ─────────────────────────────────────────────
+  build:
+    name: Build Backend & Frontend
+    runs-on: ubuntu-latest
+    needs: lint   # Only runs if lint passes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ── Backend Build ──────────────────────────
+      - name: Install backend dependencies
+        run: cd backend && npm install
+
+      # esbuild bundles server.js → dist/server.js (minified + sourcemap)
+      # Externals: bcryptjs, pg (native C modules — excluded from bundle)
+      - name: Build backend (esbuild)
+        run: cd backend && npm run build
+        # This runs:
+        # esbuild server.js --bundle --platform=node --target=node20
+        #   --outfile=dist/server.js --minify --sourcemap
+        #   --external:bcryptjs --external:pg
+
+      # Verify dist file exists
+      - name: Verify backend build output
+        run: test -f backend/dist/server.js && echo " Backend build OK"
+
+      # ── Frontend Build ─────────────────────────
+      - name: Install frontend dependencies
+        run: cd healthsphere && npm install
+
+      # Inject backend URL so apiConfig.js uses the Render API in production
+      - name: Build frontend (React)
+        run: cd healthsphere && npm run build
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          # CI=false allows build to succeed even if there are warnings
+          CI: false
+
+      # Verify React build folder
+      - name: Verify frontend build output
+        run: test -d healthsphere/build && echo " Frontend build OK"
+
+      # ── Upload Artifacts (optional, for debugging) ──
+      - name: Upload backend dist as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-dist
+          path: backend/dist/
+          retention-days: 3
+
+      - name: Upload frontend build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: healthsphere/build/
+          retention-days: 3
+
+  # ─────────────────────────────────────────────
+  # JOB 3: Deploy to Render
+  # Only runs on push to main (not on PRs)
+  # ─────────────────────────────────────────────
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    needs: build   # Only runs if build passes
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Deploy Backend API to Render
+        run: |
+          echo " Triggering Render deploy for healthsphere-api..."
+          curl -s -o response.json -w "%{http_code}" \
+            --request POST \
+            --url "https://api.render.com/v1/services/${{ secrets.RENDER_BACKEND_SERVICE_ID }}/deploys" \
+            --header "Accept: application/json" \
+            --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            --header "Content-Type: application/json" \
+            --data '{"clearCache": false}' > http_code.txt
+          HTTP_CODE=$(cat http_code.txt)
+          echo "Response code: $HTTP_CODE"
+          cat response.json
+          if [ "$HTTP_CODE" != "201" ]; then
+            echo " Backend deploy trigger failed (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+          echo " Backend deploy triggered successfully"
+
+      - name: Deploy Frontend Static Site to Render
+        run: |
+          echo " Triggering Render deploy for healthsphere-ui..."
+          curl -s -o response.json -w "%{http_code}" \
+            --request POST \
+            --url "https://api.render.com/v1/services/${{ secrets.RENDER_FRONTEND_SERVICE_ID }}/deploys" \
+            --header "Accept: application/json" \
+            --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            --header "Content-Type: application/json" \
+            --data '{"clearCache": false}' > http_code.txt
+          HTTP_CODE=$(cat http_code.txt)
+          echo "Response code: $HTTP_CODE"
+          cat response.json
+          if [ "$HTTP_CODE" != "201" ]; then
+            echo " Frontend deploy trigger failed (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+          echo " Frontend deploy triggered successfully"
+
+      - name: Deployment Summary
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  HealthSphere Deployment Triggered "
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  Backend API  → healthsphere-api (Render)"
+          echo "  Frontend UI  → healthsphere-ui  (Render)"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
